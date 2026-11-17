@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Island Vibe | Restaurant & Lounge</title>
+    <!-- Tailwind CSS CDN for rapid styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        islandTurquoise: '#00ced1',
+                        islandCoral: '#ff6f61',
+                        islandSand: '#f4f1ea',
+                        islandDark: '#0b1114'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 3D Logo Flip Animation */
+        .perspective-container {
+            perspective: 1000px;
+        }
+        .flip-logo {
+            transform-style: preserve-3d;
+            animation: flip3D 6s infinite ease-in-out;
+        }
+        @keyframes flip3D {
+            0% { transform: rotateY(0deg); }
+            50% { transform: rotateY(180deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        /* 3D Elevated Card Style */
+        .card-3d {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform: perspective(1000px) translateZ(0px);
+        }
+        .card-3d:hover {
+            transform: perspective(1000px) translateY(-6px) translateZ(10px);
+            box-shadow: 0 20px 30px -10px rgba(0, 206, 209, 0.25);
+        }
+
+        /* Infinite Scrolling Marquee for Gallery */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 25s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+
+        /* Water Aquatic Background Aura & Stability */
+        body {
+            background: radial-gradient(circle at center, #0e2a35 0%, #0b1114 70%);
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
+        /* Menu Card Watermark Background */
+        .menu-watermark {
+            position: relative;
+            overflow: hidden;
+        }
+        .menu-watermark::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url('logo.png') center/contain no-repeat;
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .menu-watermark > * {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-islandDark text-islandSand font-sans antialiased relative selection:bg-islandTurquoise selection:text-islandDark">
+
+    <!-- Transparent Navigation Bar (Hamburger & Cart only) -->
+    <nav class="fixed top-0 left-0 right-0 w-full bg-transparent z-40 px-3 sm:px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
+        <!-- Left: Hamburger Menu Button -->
+        <div class="flex items-center">
+            <button onclick="toggleMobileMenu()" class="text-islandTurquoise text-2xl sm:text-3xl focus:outline-none p-2 bg-black/40 backdrop-blur-md rounded-xl border border-islandTurquoise/30 shadow-lg hover:bg-islandTurquoise hover:text-islandDark transition">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Center: Logo -->
+        <div class="flex items-center">
+            <a href="#home" onclick="jumpToSection(event, 'home')"><img src="logo.png" alt="Island Vibe Logo" class="w-12 h-12 sm:w-14 sm:h-14 object-contain rounded-full border border-islandTurquoise shadow-[0_0_20px_rgba(0,206,209,0.5)]"></a>
+        </div>
+
+        <!-- Right: Cart Button -->
+        <div class="flex items-center">
+            <button onclick="toggleCartDrawer()" class="relative bg-islandTurquoise text-islandDark px-3.5 py-2 sm:px-4 rounded-full font-bold hover:bg-cyan-400 transition flex items-center space-x-2 shadow-lg shadow-cyan-500/20 text-sm sm:text-base">
+                <i class="fa-solid fa-utensils"></i>
+                <span id="cart-count">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Slide-out Hamburger Menu Drawer (Includes Navigation & Admin Panel) -->
+    <div id="mobile-menu" class="fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-islandDark/95 backdrop-blur-xl border-r border-islandTurquoise/30 z-50 shadow-2xl transform -translate-x-full transition-transform duration-300 flex flex-col p-6 overflow-y-auto">
+        <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
+            <span class="text-islandTurquoise font-bold text-lg flex items-center space-x-2">
+                <i class="fa-solid fa-compass"></i> <span>Navigation Menu</span>
+            </span>
+            <button onclick="toggleMobileMenu()" class="text-gray-400 hover:text-white text-xl p-2"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="flex flex-col space-y-6 font-medium text-lg flex-1">
+            <a href="#home" onclick="jumpToSection(event, 'home'); toggleMobileMenu();" class="hover:text-islandTurquoise transition py-1 flex items-center space-x-3"><i class="fa-solid fa-house w-6 text-islandTurquoise"></i><span>Home</span></a>
+            <a href="#menu" onclick="jumpToSection(event, 'menu'); toggleMobileMenu();" class="hover:text-islandTurquoise transition py-1 flex items-center space-x-3"><i class="fa-solid fa-utensils w-6 text-islandTurquoise"></i><span>Menu</span></a>
+            <a href="#booking" onclick="jumpToSection(event, 'booking'); toggleMobileMenu();" class="hover:text-islandTurquoise transition py-1 flex items-center space-x-3"><i class="fa-solid fa-calendar-days w-6 text-islandTurquoise"></i><span>Book Table</span></a>
+            <a href="#gallery" onclick="jumpToSection(event, 'gallery'); toggleMobileMenu();" class="hover:text-islandTurquoise transition py-1 flex items-center space-x-3"><i class="fa-solid fa-images w-6 text-islandTurquoise"></i><span>Gallery</span></a>
+            <a href="#directions" onclick="jumpToSection(event, 'directions'); toggleMobileMenu();" class="hover:text-islandTurquoise transition py-1 flex items-center space-x-3"><i class="fa-solid fa-map-location-dot w-6 text-islandTurquoise"></i><span>Directions</span></a>
+            
+            <div class="pt-6 border-t border-white/10 mt-auto">
+                <button onclick="promptAdminAccess()" class="w-full text-left text-islandCoral hover:text-red-400 transition flex items-center space-x-3 font-bold py-3 px-4 bg-islandCoral/10 rounded-xl border border-islandCoral/30">
+                    <i class="fa-solid fa-lock text-xl"></i> <span>Admin Panel</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section with Video Background & 3D Flipping Logo -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden py-28 px-4 sm:px-6 w-full">
+        <!-- Hero Background Video -->
+        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-35">
+            <source src="video1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-islandDark z-10"></div>
+
+        <div class="relative z-20 text-center max-w-3xl mx-auto flex flex-col items-center w-full">
+            <!-- 3D Flipping Logo -->
+            <div class="perspective-container mb-6 sm:mb-8">
+                <img src="logo.png" alt="Island Vibe Logo 3D" class="flip-logo w-40 h-40 sm:w-52 sm:h-52 md:w-60 md:h-60 object-contain drop-shadow-[0_20px_40px_rgba(0,206,209,0.7)]">
+            </div>
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight">Welcome to <span class="text-islandTurquoise">Island Vibe</span></h1>
+            <p class="text-base sm:text-lg md:text-xl text-islandSand/90 mb-8 max-w-xl px-2">Experience authentic coastal cuisine, refreshing island drinks, and vibrant seaside dining.</p>
+            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto px-4 sm:px-0">
+                <a href="#menu" onclick="jumpToSection(event, 'menu')" class="bg-islandTurquoise text-islandDark px-8 py-3.5 rounded-full font-bold hover:bg-cyan-400 transition shadow-lg shadow-cyan-500/35 text-center">Explore Menu</a>
+                <a href="#booking" onclick="jumpToSection(event, 'booking')" class="bg-transparent border-2 border-islandCoral text-islandCoral px-8 py-3.5 rounded-full font-bold hover:bg-islandCoral hover:text-white transition text-center">Book a Table</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section with 3 Category Tabs & 3D Cards -->
+    <section id="menu" class="py-24 px-3 sm:px-6 relative bg-gradient-to-b from-[#0b1114] via-[#072935] to-[#0b1114] border-y border-islandTurquoise/20 w-full">
+        <!-- Ocean Glow Effects -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-900/30 via-transparent to-transparent pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto relative z-10 w-full">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mb-2">Our Island Menu</h2>
+                <p class="text-islandTurquoise text-sm sm:text-base">Freshly prepared seaside dishes & refreshing beverages</p>
+            </div>
+
+            <!-- 3 Category Tabs (Dinner, Drinks, Cocktail) -->
+            <div class="flex justify-center items-center space-x-2 sm:space-x-4 mb-10 overflow-x-auto py-2">
+                <button onclick="filterMenuCategory('dinner')" id="tab-dinner" class="px-5 sm:px-8 py-2.5 rounded-full font-bold text-sm sm:text-base bg-islandTurquoise text-islandDark transition shadow-lg shadow-cyan-500/20">Dinner</button>
+                <button onclick="filterMenuCategory('drinks')" id="tab-drinks" class="px-5 sm:px-8 py-2.5 rounded-full font-bold text-sm sm:text-base bg-black/50 border border-white/20 text-white hover:border-islandTurquoise transition">Drinks</button>
+                <button onclick="filterMenuCategory('cocktail')" id="tab-cocktail" class="px-5 sm:px-8 py-2.5 rounded-full font-bold text-sm sm:text-base bg-black/50 border border-white/20 text-white hover:border-islandTurquoise transition">Cocktails</button>
+            </div>
+
+            <!-- Forced 2-Column Grid on Mobile and up with 3D Card Hover -->
+            <div id="menu-grid" class="grid grid-cols-2 gap-3 sm:gap-6 lg:gap-8 w-full">
+                <!-- Dynamic Menu Items Injected via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Table Booking Section with crystal-clear high transparency background showcasing 4K video -->
+    <section id="booking" class="relative py-28 px-4 sm:px-6 overflow-hidden border-b border-white/10 w-full">
+        <!-- 4K Optimized High-Clarity Video Background (video2.mp4) -->
+        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0 filter contrast-125 saturate-110">
+            <source src="video2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <!-- Very light vignette and subtle bottom darkening to keep video extremely clear while ensuring readable labels -->
+        <div class="absolute inset-0 bg-black/25 backdrop-blur-[0.5px] z-10"></div>
+
+        <div class="relative z-20 max-w-2xl mx-auto bg-islandDark/35 backdrop-blur-md p-6 sm:p-10 rounded-3xl border border-islandTurquoise/40 shadow-[0_25px_60px_rgba(0,0,0,0.8)] w-full">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center text-white mb-2 drop-shadow-md">Book a Dining Table</h2>
+            <p class="text-center text-islandSand mb-8 text-sm sm:text-base drop-shadow">Secure your spot for an unforgettable island dining experience.</p>
+            
+            <form id="booking-form" onsubmit="handleBooking(event)" class="space-y-5 sm:space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-white drop-shadow">Full Name</label>
+                        <input type="text" id="book-name" required class="w-full bg-black/60 border border-islandTurquoise/40 rounded-xl px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:border-islandTurquoise text-sm sm:text-base shadow-inner" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-white drop-shadow">Phone Number</label>
+                        <input type="tel" id="book-phone" required class="w-full bg-black/60 border border-islandTurquoise/40 rounded-xl px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:border-islandTurquoise text-sm sm:text-base shadow-inner" placeholder="+1 (876) 000-0000">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-white drop-shadow">Date</label>
+                        <input type="date" id="book-date" required class="w-full bg-black/60 border border-islandTurquoise/40 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-islandTurquoise text-sm sm:text-base shadow-inner">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-white drop-shadow">Time Slot</label>
+                        <select id="book-time" required class="w-full bg-black/60 border border-islandTurquoise/40 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-islandTurquoise text-sm sm:text-base shadow-inner">
+                            <option value="" disabled selected class="bg-islandDark text-white">Select a time</option>
+                            <option value="5:00 PM" class="bg-islandDark text-white">5:00 PM</option>
+                            <option value="5:30 PM" class="bg-islandDark text-white">5:30 PM</option>
+                            <option value="6:00 PM" class="bg-islandDark text-white">6:00 PM</option>
+                            <option value="6:30 PM" class="bg-islandDark text-white">6:30 PM</option>
+                            <option value="7:00 PM" class="bg-islandDark text-white">7:00 PM</option>
+                            <option value="7:30 PM" class="bg-islandDark text-white">7:30 PM</option>
+                            <option value="8:00 PM" class="bg-islandDark text-white">8:00 PM</option>
+                            <option value="8:30 PM" class="bg-islandDark text-white">8:30 PM</option>
+                            <option value="9:00 PM" class="bg-islandDark text-white">9:00 PM</option>
+                            <option value="9:30 PM" class="bg-islandDark text-white">9:30 PM</option>
+                            <option value="10:00 PM" class="bg-islandDark text-white">10:00 PM</option>
+                            <option value="10:30 PM" class="bg-islandDark text-white">10:30 PM</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-white drop-shadow">Guests</label>
+                        <select id="book-guests" class="w-full bg-black/60 border border-islandTurquoise/40 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-islandTurquoise text-sm sm:text-base shadow-inner">
+                            <option value="1 Person" class="bg-islandDark text-white">1 Person</option>
+                            <option value="2 People" selected class="bg-islandDark text-white">2 People</option>
+                            <option value="4 People" class="bg-islandDark text-white">4 People</option>
+                            <option value="6+ People" class="bg-islandDark text-white">6+ People</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-islandTurquoise text-islandDark py-4 rounded-xl font-bold hover:bg-cyan-400 transition shadow-lg shadow-cyan-500/30 text-base">Confirm Table Booking</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Gallery Section (Running Marquee with Click-to-Enlarge) -->
+    <section id="gallery" class="py-20 overflow-hidden w-full">
+        <div class="text-center mb-10 px-4">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-2">Island Gallery</h2>
+            <p class="text-islandTurquoise text-sm sm:text-base">Click any image to view in full size</p>
+        </div>
+        
+        <!-- Scrolling Marquee Container -->
+        <div class="relative w-full overflow-hidden">
+            <div class="animate-marquee flex space-x-4 py-4">
+                <!-- Set 1 -->
+                <div onclick="openLightbox('image1.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-islandTurquoise/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
+                    <img src="image1.jpg" alt="Gallery 1" class="w-full h-full object-cover">
+                </div>
+                <div onclick="openLightbox('image2.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-islandTurquoise/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
+                    <img src="image2.jpg" alt="Gallery 2" class="w-full h-full object-cover">
+                </div>
+                <div onclick="openLightbox('image3.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-islandTurquoise/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
+                    <img src="image3.jpg" alt="Gallery 3" class="w-full h-full object-cover">
+                </div>
+                <!-- Duplicate Set for Seamless Loop -->
+                <div onclick="openLightbox('image1.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-islandTurquoise/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
+                    <img src="image1.jpg" alt="Gallery 1" class="w-full h-full object-cover">
+                </div>
+                <div onclick="openLightbox('image2.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-islandTurquoise/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
+                    <img src="image2.jpg" alt="Gallery 2" class="w-full h-full object-cover">
+                </div>
+                <div onclick="openLightbox('image3.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-islandTurquoise/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
+                    <img src="image3.jpg" alt="Gallery 3" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Lightbox Modal -->
+    <div id="lightbox-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden" onclick="closeLightbox()">
+        <div class="relative max-w-4xl max-h-[90vh] flex items-center justify-center" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white hover:text-islandTurquoise text-3xl p-2 focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
+            <img id="lightbox-img" src="#" alt="Enlarged View" class="max-w-full max-h-[85vh] object-contain rounded-xl border border-islandTurquoise/40 shadow-2xl">
+        </div>
+    </div>
+
+    <!-- Directions & Map Section -->
+    <section id="directions" class="py-20 px-4 sm:px-6 bg-black/40 border-t border-white/10 w-full">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center w-full">
+            <div>
+                <h2 class="text-3xl font-bold text-white mb-4">Find Us</h2>
+                <p class="text-islandSand/80 mb-6 text-sm sm:text-base">Visit US at our Kingston location for incredible food and vibrant ambiance. Get directions straight to our restaurant.</p>
+                <div class="space-y-4 text-sm sm:text-base">
+                    <p class="flex items-center space-x-3"><i class="fa-solid fa-location-dot text-islandTurquoise text-lg min-w-[20px]"></i> <span>195 Constant Spring Rd, Kingston, Jamaica</span></p>
+                    <p class="flex items-center space-x-3"><i class="fa-solid fa-phone text-islandTurquoise text-lg min-w-[20px]"></i> <span>+1 (876) 555-VIBE</span></p>
+                    <p class="flex items-center space-x-3"><i class="fa-solid fa-clock text-islandTurquoise text-lg min-w-[20px]"></i> <span>Mon - Sun: 11:00 AM - 11:00 PM</span></p>
+                </div>
+            </div>
+            <div class="h-72 sm:h-80 rounded-2xl overflow-hidden border border-islandTurquoise/30 shadow-2xl w-full">
+                <!-- Embedded Google Map centered on 195 Constant Spring Rd, Kingston -->
+                <iframe class="w-full h-full border-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3793.8!2d-76.8145!3d18.0242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8edb312781b2bf1d%3A0x7d6f552e80e6c382!2s195%20Constant%20Spring%20Rd%2C%20Kingston!5e0!3m2!1sen!2sjm!4v1650000000000!5m2!1sen!2sjm" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Protected Admin Modal / Section -->
+    <div id="admin-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-islandDark w-full max-w-2xl p-6 sm:p-8 rounded-2xl border border-islandCoral/40 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-2"><i class="fa-solid fa-xmark"></i></button>
+            
+            <h2 class="text-2xl font-bold text-islandCoral mb-2 flex items-center space-x-2">
+                <i class="fa-solid fa-lock"></i> <span>Restaurant Admin Panel</span>
+            </h2>
+            <p class="text-sm text-islandSand/70 mb-6">Add new menu items with custom images via Firebase or delete existing ones.</p>
+
+            <form id="add-menu-form" onsubmit="handleAddMenuItem(event)" class="space-y-4 mb-8 pb-8 border-b border-white/10">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <input type="text" id="admin-title" placeholder="Food Name" required class="bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-islandCoral text-sm sm:text-base">
+                    <input type="text" id="admin-price" placeholder="Price (e.g. $2,500)" required class="bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-islandCoral text-sm sm:text-base">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <input type="text" id="admin-desc" placeholder="Short Description" required class="bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-islandCoral text-sm sm:text-base">
+                    <select id="admin-category" class="bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-islandCoral text-sm sm:text-base">
+                        <option value="dinner">Dinner</option>
+                        <option value="drinks">Drinks</option>
+                        <option value="cocktail">Cocktail</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1 text-islandSand/80">Menu Item Image</label>
+                    <input type="file" id="admin-image" accept="image/*" required class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-islandCoral file:text-white hover:file:bg-red-600 transition">
+                </div>
+                <button type="submit" id="admin-submit-btn" class="w-full bg-islandCoral text-white py-3.5 rounded-lg font-bold hover:bg-red-600 transition shadow-lg text-base">Upload & Add Menu Item</button>
+            </form>
+
+            <h3 class="text-lg font-bold mb-4">Manage Current Menu Items</h3>
+            <div id="admin-menu-list" class="space-y-3">
+                <!-- Dynamically populated list for deletion -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Drawer (Food Delivery & WiPay Checkout) -->
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-islandDark border-l border-islandTurquoise/30 z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-6 border-b border-white/10 flex justify-between items-center">
+            <h3 class="text-xl font-bold text-islandTurquoise flex items-center space-x-2">
+                <i class="fa-solid fa-burger"></i> <span>Food Delivery Order</span>
+            </h3>
+            <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-white text-xl p-2"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <!-- Cart items injected here -->
+        </div>
+        <!-- Customer Fulfillment Options & Checkout Form -->
+        <div class="p-6 border-t border-white/10 bg-black/40 space-y-4">
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-islandTurquoise mb-2">Fulfillment Option</label>
+                <div class="grid grid-cols-2 gap-2">
+                    <button type="button" id="option-delivery" onclick="setFulfillmentType('delivery')" class="py-2.5 rounded-lg font-bold text-sm bg-islandTurquoise text-islandDark transition shadow">Delivery</button>
+                    <button type="button" id="option-pickup" onclick="setFulfillmentType('pickup')" class="py-2.5 rounded-lg font-bold text-sm bg-black/50 border border-white/20 text-white transition">Pickup</button>
+                </div>
+            </div>
+            
+            <div id="delivery-location-container">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-islandSand/80 mb-1">Delivery Location</label>
+                <input type="text" id="customer-location" placeholder="Enter street address / parish" class="w-full bg-black/50 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-islandTurquoise">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-islandSand/80 mb-1">Phone Number</label>
+                <input type="tel" id="customer-phone" placeholder="+1 (876) 000-0000" class="w-full bg-black/50 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-islandTurquoise">
+            </div>
+
+            <div class="flex justify-between pt-2 text-lg font-bold">
+                <span>Total:</span>
+                <span id="cart-total" class="text-islandTurquoise">$0.00</span>
+            </div>
+            <button onclick="proceedToWiPay()" class="w-full bg-islandTurquoise text-islandDark py-3.5 rounded-xl font-bold hover:bg-cyan-400 transition shadow-lg text-base">Pay</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-black text-center border-t border-white/10 w-full">
+        <div class="flex justify-center space-x-6 mb-6 text-2xl">
+            <a href="https://instagram.com" target="_blank" class="text-islandTurquoise hover:text-white transition p-2"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://wa.me/18765558423" target="_blank" class="text-islandTurquoise hover:text-white transition p-2"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://tiktok.com" target="_blank" class="text-islandTurquoise hover:text-white transition p-2"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+        <p class="text-sm text-islandSand/60">&copy; 2026 All rights reserved. Site by MS Media.</p>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        let currentFulfillment = 'delivery';
+        let currentCategory = 'dinner';
+
+        function setFulfillmentType(type) {
+            currentFulfillment = type;
+            const btnDelivery = document.getElementById('option-delivery');
+            const btnPickup = document.getElementById('option-pickup');
+            const locationContainer = document.getElementById('delivery-location-container');
+
+            if (type === 'delivery') {
+                btnDelivery.className = "py-2.5 rounded-lg font-bold text-sm bg-islandTurquoise text-islandDark transition shadow";
+                btnPickup.className = "py-2.5 rounded-lg font-bold text-sm bg-black/50 border border-white/20 text-white transition";
+                locationContainer.style.display = 'block';
+            } else {
+                btnPickup.className = "py-2.5 rounded-lg font-bold text-sm bg-islandTurquoise text-islandDark transition shadow";
+                btnDelivery.className = "py-2.5 rounded-lg font-bold text-sm bg-black/50 border border-white/20 text-white transition";
+                locationContainer.style.display = 'none';
+            }
+        }
+
+        function filterMenuCategory(category) {
+            currentCategory = category;
+            ['dinner', 'drinks', 'cocktail'].forEach(cat => {
+                const btn = document.getElementById(`tab-${cat}`);
+                if (cat === category) {
+                    btn.className = "px-5 sm:px-8 py-2.5 rounded-full font-bold text-sm sm:text-base bg-islandTurquoise text-islandDark transition shadow-lg shadow-cyan-500/20";
+                } else {
+                    btn.className = "px-5 sm:px-8 py-2.5 rounded-full font-bold text-sm sm:text-base bg-black/50 border border-white/20 text-white hover:border-islandTurquoise transition";
+                }
+            });
+            renderMenu();
+        }
+
+        // Lightbox Functions
+        function openLightbox(imgSrc) {
+            const modal = document.getElementById('lightbox-modal');
+            const img = document.getElementById('lightbox-img');
+            img.src = imgSrc;
+            modal.classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.add('hidden');
+        }
+
+        // Instant Jump to Section
+        function jumpToSection(event, sectionId) {
+            event.preventDefault();
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'auto' });
+            }
+        }
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "YOUR_FIREBASE_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.firestore();
+        const storage = firebase.storage();
+
+        // Initial Menu Data fallback
+        let menuItems = [
+            { id: '1', title: 'Island Jerk Chicken Combo', price: '$2,200', desc: 'Served with festival, bammie, and tropical island sauce.', category: 'dinner', imageUrl: 'logo.png' },
+            { id: '2', title: 'Seafood Escovitch Fish', price: '$3,800', desc: 'Fresh catch topped with spicy pickled peppers and onions.', category: 'dinner', imageUrl: 'logo.png' },
+            { id: '3', title: 'Tropical Sunset Cocktail', price: '$1,200', desc: 'Rum, pineapple, orange juice, and a splash of grenadine.', category: 'cocktail', imageUrl: 'logo.png' },
+            { id: '4', title: 'Coconut Curry Shrimp', price: '$3,500', desc: 'Juicy shrimp simmered in rich coconut curry with island spices.', category: 'dinner', imageUrl: 'logo.png' }
+        ];
+
+        let cart = [];
+
+        // Fetch menu items from Firestore on load
+        function fetchMenuItems() {
+            db.collection("menuItems").get().then((querySnapshot) => {
+                if (!querySnapshot.empty) {
+                    menuItems = [];
+                    querySnapshot.forEach((doc) => {
+                        menuItems.push({ id: doc.id, category: 'dinner', ...doc.data() });
+                    });
+                }
+                renderMenu();
+            }).catch((error) => {
+                console.log("Error getting documents: ", error);
+                renderMenu();
+            });
+        }
+
+        function renderMenu() {
+            const menuGrid = document.getElementById('menu-grid');
+            const adminList = document.getElementById('admin-menu-list');
+            
+            menuGrid.innerHTML = '';
+            adminList.innerHTML = '';
+
+            const filteredItems = menuItems.filter(item => (item.category || 'dinner') === currentCategory);
+
+            filteredItems.forEach(item => {
+                // Public 3D Menu Card
+                menuGrid.innerHTML += `
+                    <div class="menu-watermark card-3d bg-black/60 border border-islandTurquoise/30 rounded-2xl shadow-xl overflow-hidden flex flex-col justify-between backdrop-blur-sm">
+                        <div class="h-28 sm:h-52 overflow-hidden bg-black/40">
+                            <img src="${item.imageUrl || 'logo.png'}" alt="${item.title}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-3 sm:p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex flex-col sm:flex-row justify-between items-start mb-1 sm:mb-2">
+                                    <h3 class="text-sm sm:text-xl font-bold text-white leading-snug">${item.title}</h3>
+                                    <span class="text-islandTurquoise font-bold text-xs sm:text-lg mt-1 sm:mt-0">${item.price}</span>
+                                </div>
+                                <p class="text-islandSand/70 text-xs sm:text-sm mb-4 line-clamp-2">${item.desc}</p>
+                            </div>
+                            <button onclick="addToCart('${item.id}')" class="w-full bg-islandTurquoise/20 border border-islandTurquoise text-islandTurquoise py-2 sm:py-3 rounded-xl font-bold hover:bg-islandTurquoise hover:text-islandDark transition text-xs sm:text-base">Add to Order</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            menuItems.forEach(item => {
+                // Admin Management List
+                adminList.innerHTML += `
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-black/40 p-3 rounded-lg border border-white/10 text-sm gap-3">
+                        <div class="flex items-center space-x-3">
+                            <img src="${item.imageUrl || 'logo.png'}" class="w-12 h-12 object-cover rounded-md flex-shrink-0">
+                            <div><strong class="text-white block">${item.title}</strong> <span class="text-islandTurquoise">${item.price} (${item.category || 'dinner'})</span></div>
+                        </div>
+                        <button onclick="deleteMenuItem('${item.id}')" class="text-islandCoral hover:text-red-400 font-bold self-end sm:self-center"><i class="fa-solid fa-trash"></i> Delete</button>
+                    </div>
+                `;
+            });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('-translate-x-full');
+        }
+
+        function promptAdminAccess() {
+            toggleMobileMenu();
+            const passcode = prompt("Please enter the Admin Passcode:");
+            if (passcode === "4555") {
+                document.getElementById('admin-modal').classList.remove('hidden');
+            } else if (passcode !== null) {
+                alert("Incorrect passcode!");
+            }
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').classList.add('hidden');
+        }
+
+        async function handleAddMenuItem(e) {
+            e.preventDefault();
+            const title = document.getElementById('admin-title').value;
+            let price = document.getElementById('admin-price').value;
+            if (!price.startsWith('$')) price = '$' + price;
+            const desc = document.getElementById('admin-desc').value;
+            const category = document.getElementById('admin-category').value;
+            const imageFile = document.getElementById('admin-image').files[0];
+
+            const submitBtn = document.getElementById('admin-submit-btn');
+            submitBtn.innerText = "Uploading to Firebase...";
+            submitBtn.disabled = true;
+
+            try {
+                const storageRef = storage.ref(`menu_images/${Date.now()}_${imageFile.name}`);
+                const snapshot = await storageRef.put(imageFile);
+                const downloadURL = await snapshot.ref.getDownloadURL();
+
+                const newItem = { title, price, desc, category, imageUrl: downloadURL };
+                const docRef = await db.collection("menuItems").add(newItem);
+                
+                menuItems.push({ id: docRef.id, ...newItem });
+                renderMenu();
+                
+                document.getElementById('add-menu-form').reset();
+                alert('Menu item successfully added via Firebase!');
+                closeAdminModal();
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert("Failed to upload item. Please check your Firebase configuration.");
+            } finally {
+                submitBtn.innerText = "Upload & Add Menu Item";
+                submitBtn.disabled = false;
+            }
+        }
+
+        function deleteMenuItem(id) {
+            if (confirm("Are you sure you want to delete this menu item?")) {
+                db.collection("menuItems").doc(id).delete().then(() => {
+                    menuItems = menuItems.filter(m => m.id !== id);
+                    renderMenu();
+                }).catch((error) => {
+                    console.error("Error removing document: ", error);
+                });
+            }
+        }
+
+        function addToCart(id) {
+            const item = menuItems.find(m => m.id == id);
+            cart.push(item);
+            updateCartUI();
+            toggleCartDrawer(true);
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const cartContainer = document.getElementById('cart-items');
+            cartContainer.innerHTML = '';
+
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += parseFloat(item.price.replace('$', '').replace(',', ''));
+                cartContainer.innerHTML += `
+                    <div class="flex justify-between items-center bg-white/5 p-3 rounded-lg">
+                        <div>
+                            <div class="font-bold text-white">${item.title}</div>
+                            <div class="text-xs text-islandTurquoise">${item.price}</div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-gray-400 hover:text-islandCoral p-2"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                `;
+            });
+            document.getElementById('cart-total').innerText = '$' + total.toLocaleString();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function toggleCartDrawer(open = false) {
+            const drawer = document.getElementById('cart-drawer');
+            if (open) {
+                drawer.classList.remove('translate-x-full');
+            } else {
+                drawer.classList.toggle('translate-x-full');
+            }
+        }
+
+        function proceedToWiPay() {
+            if (cart.length === 0) {
+                alert('Your order is empty!');
+                return;
+            }
+
+            const phone = document.getElementById('customer-phone').value.trim();
+            const location = document.getElementById('customer-location').value.trim();
+
+            if (!phone) {
+                alert('Please enter your phone number.');
+                document.getElementById('customer-phone').focus();
+                return;
+            }
+
+            if (currentFulfillment === 'delivery' && !location) {
+                alert('Please enter your delivery location.');
+                document.getElementById('customer-location').focus();
+                return;
+            }
+
+            alert('Redirecting securely to WiPay Payment Gateway...');
+            setTimeout(() => {
+                let orderText = `Hello Island Vibe, I would like to place an order:%0A`;
+                orderText += `*Fulfillment:* ${currentFulfillment.toUpperCase()}%0A`;
+                if (currentFulfillment === 'delivery') {
+                    orderText += `*Location:* ${encodeURIComponent(location)}%0A`;
+                }
+                orderText += `*Phone:* ${encodeURIComponent(phone)}%0A%0A*Items:*%0A`;
+                
+                cart.forEach((item, i) => {
+                    orderText += `${i + 1}. ${item.title} - ${item.price}%0A`;
+                });
+                orderText += `%0A*Payment Status: Paid via WiPay*`;
+
+                const whatsappNumber = "18765558423"; 
+                window.location.href = `https://wa.me/${whatsappNumber}?text=${orderText}`;
+            }, 1500);
+        }
+
+        function handleBooking(e) {
+            e.preventDefault();
+            const name = document.getElementById('book-name').value.trim();
+            const phone = document.getElementById('book-phone').value.trim();
+            const date = document.getElementById('book-date').value;
+            const time = document.getElementById('book-time').value;
+            const guests = document.getElementById('book-guests').value;
+
+            // Construct WhatsApp message for table booking
+            let bookingText = `Hello Island Vibe, I would like to book a dining table:%0A%0A`;
+            bookingText += `*Full Name:* ${encodeURIComponent(name)}%0A`;
+            bookingText += `*Phone Number:* ${encodeURIComponent(phone)}%0A`;
+            bookingText += `*Date:* ${encodeURIComponent(date)}%0A`;
+            bookingText += `*Time Slot:* ${encodeURIComponent(time)}%0A`;
+            bookingText += `*Guests:* ${encodeURIComponent(guests)}%0A%0A`;
+            bookingText += `Please confirm my reservation!`;
+
+            const whatsappNumber = "18765558423";
+
+            alert(`Thank you ${name}! Redirecting to WhatsApp to send your table reservation request to the restaurant...`);
+            
+            setTimeout(() => {
+                window.location.href = `https://wa.me/${whatsappNumber}?text=${bookingText}`;
+            }, 1000);
+        }
+
+        // Initialize menu on load
+        fetchMenuItems();
+    </script>
+</body>
+</html>
