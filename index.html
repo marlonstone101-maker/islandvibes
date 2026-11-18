@@ -48,7 +48,7 @@
         }
         .card-3d:hover {
             transform: perspective(1000px) translateY(-6px) translateZ(10px);
-            box-shadow: 0 20px 30px -10px rgba(234, 179, 8, 0.25);
+            box-shadow: 0 20px 30px -10px rgba(56, 189, 248, 0.25);
         }
 
         /* Infinite Scrolling Marquee */
@@ -77,7 +77,7 @@
 
         /* Green, Red, Yellow, Light Blue Logo-Inspired Background */
         body {
-            background: linear-gradient(135deg, #0d1a14 0%, #113822 25%, #441416 50%, #42380c 75%, #082d3d 100%);
+            background: linear-gradient(135deg, #081d24 0%, #0d1a14 20%, #113822 40%, #441416 60%, #42380c 80%, #082d3d 100%);
             min-height: 100vh;
             width: 100%;
             overflow-x: hidden;
@@ -123,10 +123,10 @@
         }
     </style>
 </head>
-<body class="bg-islandDark text-islandSand font-sans antialiased relative selection:bg-yellow-500 selection:text-islandDark">
+<body class="bg-islandDark text-islandSand font-sans antialiased relative selection:bg-sky-400 selection:text-islandDark">
 
-    <!-- Top Announcement Bar (Moving Continuous Marquee Ticker) -->
-    <div class="bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-islandDark text-xs sm:text-sm font-bold py-2 overflow-hidden relative z-50 shadow-md w-full">
+    <!-- Top Announcement Bar (Moving Continuous Marquee Ticker with Light Blue Added) -->
+    <div class="bg-gradient-to-r from-green-500 via-sky-400 via-yellow-400 to-red-500 text-sky-400 text-xs sm:text-sm font-bold py-2 overflow-hidden relative z-50 shadow-md w-full">
         <div class="animate-marquee flex items-center space-x-8 whitespace-nowrap">
             <!-- Set 1 -->
             <div class="flex items-center space-x-8">
@@ -155,23 +155,23 @@
         </div>
     </div>
 
-    <!-- Transparent Navigation Bar (Hamburger & Cart updated to Green, Yellow, Red) -->
+    <!-- Transparent Navigation Bar (Hamburger & Cart updated to include Light Blue) -->
     <nav class="fixed top-[36px] sm:top-[40px] left-0 right-0 w-full bg-transparent z-40 px-3 sm:px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
-        <!-- Left: Hamburger Menu Button (Green, Yellow, Red Theme) -->
+        <!-- Left: Hamburger Menu Button (Green, Sky Blue, Yellow, Red Theme) -->
         <div class="flex items-center">
-            <button onclick="toggleMobileMenu()" class="text-islandDark text-2xl sm:text-3xl focus:outline-none p-2 bg-gradient-to-r from-green-500 via-yellow-400 to-red-500 backdrop-blur-md rounded-xl border border-yellow-300/40 shadow-lg hover:opacity-90 transition">
+            <button onclick="toggleMobileMenu()" class="text-sky-400 text-2xl sm:text-3xl focus:outline-none p-2 bg-gradient-to-r from-green-500 via-sky-400 via-yellow-400 to-red-500 backdrop-blur-md rounded-xl border border-sky-300/40 shadow-lg hover:opacity-90 transition">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
 
         <!-- Center: Logo -->
         <div class="flex items-center">
-            <a href="#home" onclick="jumpToSection(event, 'home')"><img src="logo.png" alt="Island Vibe Logo" class="w-12 h-12 sm:w-14 sm:h-14 object-contain rounded-full border border-yellow-400 shadow-[0_0_20px_rgba(234,179,8,0.5)]"></a>
+            <a href="#home" onclick="jumpToSection(event, 'home')"><img src="logo.png" alt="Island Vibe Logo" class="w-12 h-12 sm:w-14 sm:h-14 object-contain rounded-full border border-sky-400 shadow-[0_0_20px_rgba(56,189,248,0.5)]"></a>
         </div>
 
-        <!-- Right: Cart Button (Green, Yellow, Red Theme) -->
+        <!-- Right: Cart Button (Green, Sky Blue, Yellow, Red Theme) -->
         <div class="flex items-center">
-            <button onclick="toggleCartDrawer()" class="relative bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-islandDark px-3.5 py-2 sm:px-4 rounded-full font-extrabold hover:opacity-90 transition flex items-center space-x-2 shadow-lg shadow-yellow-500/20 text-sm sm:text-base">
+            <button onclick="toggleCartDrawer()" class="relative bg-gradient-to-r from-green-600 via-yellow-500 via-sky-400 to-red-600 text-sky-400 px-3.5 py-2 sm:px-4 rounded-full font-extrabold hover:opacity-90 transition flex items-center space-x-2 shadow-lg shadow-sky-500/20 text-sm sm:text-base">
                 <i class="fa-solid fa-utensils"></i>
                 <span id="cart-count">0</span>
             </button>
@@ -179,21 +179,21 @@
     </nav>
 
     <!-- Slide-out Hamburger Menu Drawer -->
-    <div id="mobile-menu" class="fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-islandDark/95 backdrop-blur-xl border-r border-yellow-500/30 z-50 shadow-2xl transform -translate-x-full transition-transform duration-300 flex flex-col p-6 overflow-y-auto">
+    <div id="mobile-menu" class="fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-islandDark/95 backdrop-blur-xl border-r border-sky-500/30 z-50 shadow-2xl transform -translate-x-full transition-transform duration-300 flex flex-col p-6 overflow-y-auto">
         <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
-            <span class="text-yellow-400 font-bold text-lg flex items-center space-x-2">
+            <span class="text-sky-400 font-bold text-lg flex items-center space-x-2">
                 <i class="fa-solid fa-compass"></i> <span>Navigation Menu</span>
             </span>
             <button onclick="toggleMobileMenu()" class="text-gray-400 hover:text-white text-xl p-2"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="flex flex-col space-y-6 font-medium text-lg flex-1">
-            <a href="#home" onclick="jumpToSection(event, 'home'); toggleMobileMenu();" class="hover:text-yellow-400 transition py-1 flex items-center space-x-3"><i class="fa-solid fa-house w-6 text-green-500"></i><span>Home</span></a>
-            <a href="#menu" onclick="jumpToSection(event, 'menu'); toggleMobileMenu();" class="hover:text-yellow-400 transition py-1 flex items-center space-x-3"><i class="fa-solid fa-utensils w-6 text-yellow-500"></i><span>Menu</span></a>
-            <a href="#events" onclick="jumpToSection(event, 'events'); toggleMobileMenu();" class="hover:text-yellow-400 transition py-1 flex items-center space-x-3"><i class="fa-solid fa-champagne-glasses w-6 text-red-500"></i><span>Event Space</span></a>
-            <a href="#booking" onclick="jumpToSection(event, 'booking'); toggleMobileMenu();" class="hover:text-yellow-400 transition py-1 flex items-center space-x-3"><i class="fa-solid fa-calendar-days w-6 text-green-500"></i><span>Book Table</span></a>
-            <a href="#gallery" onclick="jumpToSection(event, 'gallery'); toggleMobileMenu();" class="hover:text-yellow-400 transition py-1 flex items-center space-x-3"><i class="fa-solid fa-images w-6 text-yellow-500"></i><span>Gallery</span></a>
-            <a href="#reviews" onclick="jumpToSection(event, 'reviews'); toggleMobileMenu();" class="hover:text-yellow-400 transition py-1 flex items-center space-x-3"><i class="fa-solid fa-star w-6 text-red-500"></i><span>Reviews</span></a>
-            <a href="#directions" onclick="jumpToSection(event, 'directions'); toggleMobileMenu();" class="hover:text-yellow-400 transition py-1 flex items-center space-x-3"><i class="fa-solid fa-map-location-dot w-6 text-green-500"></i><span>Directions</span></a>
+            <a href="#home" onclick="jumpToSection(event, 'home'); toggleMobileMenu();" class="hover:text-sky-400 transition py-1 flex items-center space-x-3"><i class="fa-solid fa-house w-6 text-green-500"></i><span>Home</span></a>
+            <a href="#menu" onclick="jumpToSection(event, 'menu'); toggleMobileMenu();" class="hover:text-sky-400 transition py-1 flex items-center space-x-3"><i class="fa-solid fa-utensils w-6 text-sky-400"></i><span>Menu</span></a>
+            <a href="#events" onclick="jumpToSection(event, 'events'); toggleMobileMenu();" class="hover:text-sky-400 transition py-1 flex items-center space-x-3"><i class="fa-solid fa-champagne-glasses w-6 text-red-500"></i><span>Event Space</span></a>
+            <a href="#booking" onclick="jumpToSection(event, 'booking'); toggleMobileMenu();" class="hover:text-sky-400 transition py-1 flex items-center space-x-3"><i class="fa-solid fa-calendar-days w-6 text-yellow-400"></i><span>Book Table</span></a>
+            <a href="#gallery" onclick="jumpToSection(event, 'gallery'); toggleMobileMenu();" class="hover:text-sky-400 transition py-1 flex items-center space-x-3"><i class="fa-solid fa-images w-6 text-green-500"></i><span>Gallery</span></a>
+            <a href="#reviews" onclick="jumpToSection(event, 'reviews'); toggleMobileMenu();" class="hover:text-sky-400 transition py-1 flex items-center space-x-3"><i class="fa-solid fa-star w-6 text-sky-400"></i><span>Reviews</span></a>
+            <a href="#directions" onclick="jumpToSection(event, 'directions'); toggleMobileMenu();" class="hover:text-sky-400 transition py-1 flex items-center space-x-3"><i class="fa-solid fa-map-location-dot w-6 text-red-500"></i><span>Directions</span></a>
             
             <div class="pt-6 border-t border-white/10 mt-auto">
                 <button onclick="promptAdminAccess()" class="w-full text-left text-islandCoral hover:text-red-400 transition flex items-center space-x-3 font-bold py-3 px-4 bg-islandCoral/10 rounded-xl border border-islandCoral/30">
@@ -214,92 +214,93 @@
 
         <div class="relative z-20 text-center max-w-3xl mx-auto flex flex-col items-center w-full">
             <div class="perspective-container mb-6 sm:mb-8">
-                <img src="logo.png" alt="Island Vibz Logo 3D" class="flip-logo w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 object-contain drop-shadow-[0_20px_40px_rgba(234,179,8,0.7)]">
+                <img src="logo.png" alt="Island Vibz Logo 3D" class="flip-logo w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 object-contain drop-shadow-[0_20px_40px_rgba(56,189,248,0.7)]">
             </div>
-            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight">Welcome to <span class="text-yellow-400">Island Vibz</span></h1>
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight">Welcome to <span class="text-sky-400">Island Vibz</span></h1>
             <p class="text-base sm:text-lg md:text-xl text-islandSand/90 mb-8 max-w-xl px-2">Experience authentic coastal cuisine, refreshing island drinks, and vibrant dining.</p>
             <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto px-4 sm:px-0">
-                <a href="#menu" onclick="jumpToSection(event, 'menu')" class="bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-islandDark px-8 py-3.5 rounded-full font-extrabold hover:opacity-90 transition shadow-lg text-center">Explore Menu</a>
-                <a href="#events" onclick="jumpToSection(event, 'events')" class="bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-islandDark px-8 py-3.5 rounded-full font-extrabold hover:opacity-90 transition shadow-lg text-center">Book Event Space</a>
+                <a href="#menu" onclick="jumpToSection(event, 'menu')" class="bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark px-8 py-3.5 rounded-full font-extrabold hover:opacity-90 transition shadow-lg text-center">Explore Menu</a>
+                <!-- Book Event Space Button with Red and Blue line/border -->
+                <a href="#events" onclick="jumpToSection(event, 'events')" class="bg-black/80 text-white px-8 py-3.5 rounded-full font-extrabold border-2 border-transparent bg-gradient-to-r from-red-500 via-sky-400 to-red-500 bg-clip-border hover:opacity-90 transition shadow-[0_0_20px_rgba(56,189,248,0.3)] text-center">Book Event Space</a>
             </div>
         </div>
     </section>
 
     <!-- 3D Running Menu Marquee Ticker -->
-    <div class="py-3 bg-black/60 backdrop-blur-md border-y border-yellow-500/30 overflow-hidden w-full relative z-20 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+    <div class="py-3 bg-black/60 backdrop-blur-md border-y border-sky-500/30 overflow-hidden w-full relative z-20 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
         <div class="animate-marquee flex items-center space-x-6">
             <!-- Set 1 -->
             <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Seafood Platter</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fire text-xs"></i><span>Curry Goat</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Oxtail</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Steamed Fish</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Escovitch Fish</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Curry Fish</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Brown Stew Fish</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Roasted Fish</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Boiled Fish</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Red snapper fillet</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-sky-400/40 text-sky-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(56,189,248,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fire text-xs"></i><span>Curry Goat</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Oxtail</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Steamed Fish</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Escovitch Fish</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-sky-400/40 text-sky-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(56,189,248,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Curry Fish</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Brown Stew Fish</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Roasted Fish</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Boiled Fish</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-sky-400/40 text-sky-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(56,189,248,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Red snapper fillet</span></span>
             <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Slice fish</span></span>
             <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Lobster only</span></span>
             <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Lobster & shrimp</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Crab</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Crab & Shrimp</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Crab & corn & potato</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Curry Goat Pasta</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Salmon Pasta</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Oxtail Pasta</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Shrimp Pasta</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Jerk Chicken Pasta</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Lobster Pasta</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-sky-400/40 text-sky-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(56,189,248,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Crab</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Crab & Shrimp</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Crab & corn & potato</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Curry Goat Pasta</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-sky-400/40 text-sky-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(56,189,248,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Salmon Pasta</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Oxtail Pasta</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Shrimp Pasta</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Jerk Chicken Pasta</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-sky-400/40 text-sky-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(56,189,248,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Lobster Pasta</span></span>
             <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-carrot text-xs"></i><span>Vegan Pasta</span></span>
             <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-carrot text-xs"></i><span>Vegon stew carrots</span></span>
             <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-seedling text-xs"></i><span>Ocro beans</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Mash Potatoes</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-cookie text-xs"></i><span>Bammy</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-cookie text-xs"></i><span>Crackers</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-bread-slice text-xs"></i><span>Festival</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-bread-slice text-xs"></i><span>Dumplings</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-sky-400/40 text-sky-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(56,189,248,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Mash Potatoes</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-cookie text-xs"></i><span>Bammy</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-cookie text-xs"></i><span>Crackers</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-bread-slice text-xs"></i><span>Festival</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-sky-400/40 text-sky-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(56,189,248,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-bread-slice text-xs"></i><span>Dumplings</span></span>
 
             <!-- Duplicate Set for Seamless Loop -->
             <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Seafood Platter</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fire text-xs"></i><span>Curry Goat</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Oxtail</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Steamed Fish</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Escovitch Fish</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Curry Fish</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Brown Stew Fish</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Roasted Fish</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Boiled Fish</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Red snapper fillet</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-sky-400/40 text-sky-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(56,189,248,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fire text-xs"></i><span>Curry Goat</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Oxtail</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Steamed Fish</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Escovitch Fish</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-sky-400/40 text-sky-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(56,189,248,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Curry Fish</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Brown Stew Fish</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Roasted Fish</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Boiled Fish</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-sky-400/40 text-sky-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(56,189,248,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Red snapper fillet</span></span>
             <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-fish text-xs"></i><span>Slice fish</span></span>
             <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Lobster only</span></span>
             <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Lobster & shrimp</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Crab</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Crab & Shrimp</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Crab & corn & potato</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Curry Goat Pasta</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Salmon Pasta</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Oxtail Pasta</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Shrimp Pasta</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Jerk Chicken Pasta</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Lobster Pasta</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-sky-400/40 text-sky-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(56,189,248,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Crab</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Crab & Shrimp</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Crab & corn & potato</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Curry Goat Pasta</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-sky-400/40 text-sky-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(56,189,248,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Salmon Pasta</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Oxtail Pasta</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Shrimp Pasta</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Jerk Chicken Pasta</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-sky-400/40 text-sky-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(56,189,248,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-plate-wheat text-xs"></i><span>Lobster Pasta</span></span>
             <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-carrot text-xs"></i><span>Vegan Pasta</span></span>
             <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-carrot text-xs"></i><span>Vegon stew carrots</span></span>
             <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-seedling text-xs"></i><span>Ocro beans</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Mash Potatoes</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-cookie text-xs"></i><span>Bammy</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-cookie text-xs"></i><span>Crackers</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-bread-slice text-xs"></i><span>Festival</span></span>
-            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-bread-slice text-xs"></i><span>Dumplings</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-sky-400/40 text-sky-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(56,189,248,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-utensils text-xs"></i><span>Mash Potatoes</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-yellow-500/40 text-yellow-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(234,179,8,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-cookie text-xs"></i><span>Bammy</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-red-500/40 text-red-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(239,68,68,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-cookie text-xs"></i><span>Crackers</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-green-500/40 text-green-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(34,197,94,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-bread-slice text-xs"></i><span>Festival</span></span>
+            <span class="px-5 py-2 rounded-xl bg-islandDark/80 border border-sky-400/40 text-sky-400 font-bold text-sm sm:text-base shadow-[0_4px_15px_rgba(56,189,248,0.2)] tracking-wide flex items-center space-x-2 flex-shrink-0"><i class="fa-solid fa-bread-slice text-xs"></i><span>Dumplings</span></span>
         </div>
     </div>
 
     <!-- Menu Section -->
-    <section id="menu" class="py-14 px-3 sm:px-6 relative bg-gradient-to-br from-[#1b3b22] via-[#5c4708] to-[#631818] border-y border-yellow-500/20 w-full overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-yellow-500/10 via-transparent to-transparent pointer-events-none z-0"></div>
+    <section id="menu" class="py-14 px-3 sm:px-6 relative bg-gradient-to-br from-[#1b3b22] via-[#09323a] via-[#5c4708] to-[#631818] border-y border-sky-500/20 w-full overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-sky-500/10 via-yellow-500/10 to-transparent pointer-events-none z-0"></div>
 
         <div class="absolute right-[-40px] sm:right-10 bottom-0 pointer-events-none z-0 opacity-15 animate-sway">
-            <svg class="w-72 h-96 sm:w-96 sm:h-[450px] text-yellow-400" viewBox="0 0 24 24" fill="currentColor">
+            <svg class="w-72 h-96 sm:w-96 sm:h-[450px] text-sky-400" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C11.45 2 11 2.45 11 3V5.08C7.14 5.57 4 8.87 4 12.83C4 13.38 4.45 13.83 5 13.83C5.55 13.83 6 13.38 6 12.83C6 9.87 8.35 7.45 11.23 7.04C11.16 7.35 11.12 7.67 11.12 8C11.12 10.3 12.5 12.23 14.5 13.11C13.83 14.45 13 15.93 12 17.5C10.74 15.42 9.5 13.31 8.5 11.18C8.28 10.71 7.73 10.51 7.26 10.73C6.79 10.95 6.59 11.5 6.81 11.97C7.94 14.39 9.35 16.8 10.84 19.16C10.61 20.37 9.86 21.41 8.78 22.05C8.31 22.33 8.16 22.94 8.44 23.41C8.72 23.88 9.33 24.03 9.8 23.75C11.4 22.81 12.42 21.17 12.7 19.34C13.12 19.57 13.57 19.78 14.04 19.96C14.53 20.15 15.08 19.9 15.27 19.41C15.46 18.92 15.21 18.37 14.72 18.18C14.16 17.97 13.62 17.71 13.11 17.41C14.5 15.11 15.65 12.75 16.35 10.32C17.72 11.18 19.37 11.55 21 11.26C21.55 11.16 21.93 10.65 21.83 10.1C21.73 9.55 21.22 9.17 20.67 9.27C19.4 9.5 18.06 9.22 17.02 8.54C17.43 7.67 17.7 6.75 17.82 5.81C20.35 6.74 22.18 9.17 22.18 12C22.18 12.55 22.63 13 23.18 13C23.73 13 24.18 12.55 24.18 12C24.18 8.18 21.42 4.97 17.78 4.19V3C17.78 2.45 17.33 2 16.78 2H12Z"/>
             </svg>
         </div>
@@ -307,25 +308,25 @@
         <div class="max-w-6xl mx-auto relative z-10 w-full">
             <div class="text-center mb-8">
                 <h2 class="text-3xl sm:text-4xl font-bold text-white mb-2">Our Island Menu</h2>
-                <p class="text-yellow-400 text-sm sm:text-base">Tap a category below to explore our signature selections</p>
+                <p class="text-sky-400 text-sm sm:text-base">Tap a category below to explore our signature selections</p>
             </div>
 
             <!-- Category Tabs -->
             <div class="grid grid-cols-3 gap-2 sm:flex sm:justify-center sm:items-center sm:space-x-6 mb-8 w-full px-1">
-                <button onclick="filterMenuCategory('dinner')" id="tab-dinner" class="card-3d px-2 sm:px-10 py-3 sm:py-3.5 rounded-2xl font-extrabold text-xs sm:text-lg bg-black/70 border-2 border-yellow-500 text-yellow-400 transition shadow-[0_10px_25px_rgba(234,179,8,0.25)] flex flex-col sm:flex-row items-center justify-center sm:space-x-2.5 text-center">
+                <button onclick="filterMenuCategory('dinner')" id="tab-dinner" class="card-3d px-2 sm:px-10 py-3 sm:py-3.5 rounded-2xl font-extrabold text-xs sm:text-lg bg-black/70 border-2 border-sky-400 text-sky-400 transition shadow-[0_10px_25px_rgba(56,189,248,0.25)] flex flex-col sm:flex-row items-center justify-center sm:space-x-2.5 text-center">
                     <i class="fa-solid fa-utensils mb-1 sm:mb-0"></i><span>Dinner</span>
                 </button>
-                <button onclick="filterMenuCategory('drinks')" id="tab-drinks" class="card-3d px-2 sm:px-10 py-3 sm:py-3.5 rounded-2xl font-extrabold text-xs sm:text-lg bg-black/70 border-2 border-yellow-500 text-yellow-400 transition shadow-[0_10px_25px_rgba(234,179,8,0.25)] flex flex-col sm:flex-row items-center justify-center sm:space-x-2.5 text-center">
+                <button onclick="filterMenuCategory('drinks')" id="tab-drinks" class="card-3d px-2 sm:px-10 py-3 sm:py-3.5 rounded-2xl font-extrabold text-xs sm:text-lg bg-black/70 border-2 border-sky-400 text-sky-400 transition shadow-[0_10px_25px_rgba(56,189,248,0.25)] flex flex-col sm:flex-row items-center justify-center sm:space-x-2.5 text-center">
                     <i class="fa-solid fa-wine-glass mb-1 sm:mb-0"></i><span>Drinks</span>
                 </button>
-                <button onclick="filterMenuCategory('cocktail')" id="tab-cocktail" class="card-3d px-2 sm:px-10 py-3 sm:py-3.5 rounded-2xl font-extrabold text-xs sm:text-lg bg-black/70 border-2 border-yellow-500 text-yellow-400 transition shadow-[0_10px_25px_rgba(234,179,8,0.25)] flex flex-col sm:flex-row items-center justify-center sm:space-x-2.5 text-center">
+                <button onclick="filterMenuCategory('cocktail')" id="tab-cocktail" class="card-3d px-2 sm:px-10 py-3 sm:py-3.5 rounded-2xl font-extrabold text-xs sm:text-lg bg-black/70 border-2 border-sky-400 text-sky-400 transition shadow-[0_10px_25px_rgba(56,189,248,0.25)] flex flex-col sm:flex-row items-center justify-center sm:space-x-2.5 text-center">
                     <i class="fa-solid fa-martini-glass-citrus mb-1 sm:mb-0"></i><span>Cocktails</span>
                 </button>
             </div>
 
             <div id="menu-grid" class="grid grid-cols-2 gap-3 sm:gap-6 lg:gap-8 w-full">
-                <div class="col-span-2 text-center py-12 px-4 bg-black/40 backdrop-blur-md rounded-3xl border border-yellow-500/30 shadow-2xl">
-                    <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-yellow-500/10 border border-yellow-500/40 flex items-center justify-center text-yellow-400 text-2xl shadow-[0_0_20px_rgba(234,179,8,0.3)] animate-bounce">
+                <div class="col-span-2 text-center py-12 px-4 bg-black/40 backdrop-blur-md rounded-3xl border border-sky-500/30 shadow-2xl">
+                    <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-sky-500/10 border border-sky-500/40 flex items-center justify-center text-sky-400 text-2xl shadow-[0_0_20px_rgba(56,189,248,0.3)] animate-bounce">
                         <i class="fa-solid fa-utensils"></i>
                     </div>
                     <h3 class="text-xl sm:text-2xl font-bold text-white mb-2">Discover Our Island Flavors</h3>
@@ -335,21 +336,30 @@
         </div>
     </section>
 
-    <!-- VISITOR & SERVICE INFORMATION BANNER (Updated to Green, Yellow, Red Theme) -->
-    <section class="py-10 px-4 sm:px-6 relative bg-gradient-to-r from-green-950/70 via-yellow-950/50 to-red-950/70 border-b border-yellow-500/30 w-full">
-        <div class="max-w-5xl mx-auto bg-gradient-to-r from-green-950/80 via-black/90 to-red-950/80 p-6 sm:p-8 rounded-3xl border-2 border-yellow-500/40 shadow-[0_15px_40px_rgba(234,179,8,0.2)] text-center">
-            <div class="inline-flex items-center space-x-2 bg-yellow-500/20 text-yellow-400 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4 border border-yellow-500/40">
+    <!-- VISITOR & SERVICE INFORMATION BANNER -->
+    <section class="py-10 px-4 sm:px-6 relative bg-gradient-to-r from-green-950/70 via-sky-950/50 via-yellow-950/50 to-red-950/70 border-b border-sky-500/30 w-full">
+        <div class="max-w-5xl mx-auto bg-gradient-to-r from-green-950/80 via-black/90 to-red-950/80 p-6 sm:p-8 rounded-3xl border-2 border-sky-500/40 shadow-[0_15px_40px_rgba(56,189,248,0.2)] text-center">
+            <div class="inline-flex items-center space-x-2 bg-sky-500/20 text-sky-400 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4 border border-sky-500/40">
                 <i class="fa-solid fa-circle-info"></i> <span>Visitor & Service Information</span>
             </div>
             
             <h3 class="text-xl sm:text-3xl font-extrabold text-white mb-4">We're Open Every Day From 2pm - 12am</h3>
             
+            <!-- Video 3 Added Here -->
+            <div class="relative rounded-2xl overflow-hidden border border-sky-500/40 shadow-[0_10px_30px_rgba(56,189,248,0.2)] bg-black aspect-video mb-6 max-h-[300px] w-full flex items-center justify-center">
+                <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                    <source src="video3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none"></div>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-islandSand/90 text-sm sm:text-base mb-6">
                 <div class="bg-black/50 p-4 rounded-xl border border-white/10 flex flex-col items-center justify-center space-y-1">
-                    <i class="fa-solid fa-phone text-green-400 text-lg mb-1"></i>
+                    <i class="fa-solid fa-phone text-sky-400 text-lg mb-1"></i>
                     <span class="font-semibold text-white">Call Us:</span>
-                    <a href="tel:8766697330" class="text-yellow-400 hover:underline font-bold">876-669-7330</a>
-                    <a href="tel:8768668798" class="text-yellow-400 hover:underline font-bold">876-866-8798</a>
+                    <a href="tel:8766697330" class="text-sky-400 hover:underline font-bold">876-669-7330</a>
+                    <a href="tel:8768668798" class="text-sky-400 hover:underline font-bold">876-866-8798</a>
                 </div>
                 
                 <div class="bg-black/50 p-4 rounded-xl border border-white/10 flex flex-col items-center justify-center space-y-2">
@@ -357,7 +367,7 @@
                     <span class="font-semibold text-white">Service Options:</span>
                     <div class="flex flex-wrap justify-center gap-2">
                         <span class="bg-green-500/20 text-green-400 text-xs px-2.5 py-1 rounded-full font-bold border border-green-500/30">Takeout Available</span>
-                        <span class="bg-yellow-500/20 text-yellow-400 text-xs px-2.5 py-1 rounded-full font-bold border border-yellow-500/30">Dining Available</span>
+                        <span class="bg-sky-500/20 text-sky-400 text-xs px-2.5 py-1 rounded-full font-bold border border-sky-500/30">Dining Available</span>
                         <span class="bg-red-500/20 text-red-400 text-xs px-2.5 py-1 rounded-full font-bold border border-red-500/30">Outdoor Dining</span>
                     </div>
                 </div>
@@ -370,22 +380,22 @@
             </div>
 
             <div class="flex justify-center space-x-4">
-                <a href="#booking" onclick="jumpToSection(event, 'booking')" class="bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-islandDark px-6 py-2.5 rounded-full font-extrabold hover:opacity-90 transition text-sm shadow-lg">Book a Table</a>
-                <a href="#directions" onclick="jumpToSection(event, 'directions')" class="bg-transparent border border-yellow-400 text-yellow-400 px-6 py-2.5 rounded-full font-bold hover:bg-yellow-400 hover:text-islandDark transition text-sm">Get Directions</a>
+                <a href="#booking" onclick="jumpToSection(event, 'booking')" class="bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark px-6 py-2.5 rounded-full font-extrabold hover:opacity-90 transition text-sm shadow-lg">Book a Table</a>
+                <a href="#directions" onclick="jumpToSection(event, 'directions')" class="bg-transparent border border-sky-400 text-sky-400 px-6 py-2.5 rounded-full font-bold hover:bg-sky-400 hover:text-islandDark transition text-sm">Get Directions</a>
             </div>
         </div>
     </section>
 
-    <!-- EXPERIENCE ISLAND VIBEZ VIDEO SECTION (Updated to Green, Yellow, Red Theme) -->
-    <section class="py-14 px-4 sm:px-6 relative w-full bg-gradient-to-b from-[#0b1114] via-[#112015] to-[#0b1114] overflow-hidden border-b border-yellow-500/20">
+    <!-- EXPERIENCE ISLAND VIBEZ VIDEO SECTION -->
+    <section class="py-14 px-4 sm:px-6 relative w-full bg-gradient-to-b from-[#0b1114] via-[#0b1f24] to-[#0b1114] overflow-hidden border-b border-sky-500/20">
         <div class="max-w-5xl mx-auto relative z-10">
             <div class="text-center mb-6">
-                <span class="text-yellow-400 font-bold text-xs uppercase tracking-widest block mb-2"><i class="fa-solid fa-film"></i> Vibe Showcase</span>
+                <span class="text-sky-400 font-bold text-xs uppercase tracking-widest block mb-2"><i class="fa-solid fa-film"></i> Vibe Showcase</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-2">Experience Island Vibz</h2>
                 <p class="text-islandSand/80 text-sm sm:text-base max-w-xl mx-auto">Take a quick cinematic look at our atmosphere, drinks, and culinary craftsmanship.</p>
             </div>
             
-            <div class="relative rounded-3xl overflow-hidden border-2 border-gradient from-green-500 via-yellow-500 to-red-500 shadow-[0_20px_50px_rgba(234,179,8,0.25)] bg-black aspect-video flex items-center justify-center border-yellow-500/50">
+            <div class="relative rounded-3xl overflow-hidden border-2 border-gradient from-green-500 via-sky-400 via-yellow-500 to-red-500 shadow-[0_20px_50px_rgba(56,189,248,0.25)] bg-black aspect-video flex items-center justify-center border-sky-500/50">
                 <video autoplay muted loop playsinline class="w-full h-full object-cover">
                     <source src="video2.mp4" type="video/mp4">
                     Your browser does not support the video tag.
@@ -395,39 +405,39 @@
         </div>
     </section>
 
-    <!-- TABLE BOOKING SECTION (Updated to Green, Yellow, Red Theme) -->
-    <section id="booking" class="relative py-16 px-4 sm:px-6 overflow-hidden border-b border-white/10 w-full bg-gradient-to-b from-[#0b1114] via-[#152010] to-[#0b1114]">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-green-500/10 via-yellow-950/20 to-transparent pointer-events-none z-0"></div>
-        <div class="absolute top-10 left-10 w-72 h-72 bg-green-500/5 rounded-full blur-3xl pointer-events-none ocean-bubble"></div>
+    <!-- TABLE BOOKING SECTION -->
+    <section id="booking" class="relative py-16 px-4 sm:px-6 overflow-hidden border-b border-white/10 w-full bg-gradient-to-b from-[#0b1114] via-[#0b1c24] to-[#0b1114]">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-sky-500/10 via-yellow-950/20 to-transparent pointer-events-none z-0"></div>
+        <div class="absolute top-10 left-10 w-72 h-72 bg-sky-500/5 rounded-full blur-3xl pointer-events-none ocean-bubble"></div>
         <div class="absolute bottom-10 right-10 w-96 h-96 bg-red-500/5 rounded-full blur-3xl pointer-events-none ocean-bubble" style="animation-delay: 3s;"></div>
 
         <div class="relative z-20 max-w-2xl mx-auto">
             <!-- Closed Book State -->
-            <div id="book-cover-state" class="magic-book cursor-pointer relative border-2 border-yellow-500/60 p-8 sm:p-12 rounded-3xl shadow-[0_25px_60px_rgba(234,179,8,0.3)] text-center group hover:border-yellow-400 transition transform hover:-translate-y-1 overflow-hidden" onclick="openBookingBook()">
+            <div id="book-cover-state" class="magic-book cursor-pointer relative border-2 border-sky-500/60 p-8 sm:p-12 rounded-3xl shadow-[0_25px_60px_rgba(56,189,248,0.3)] text-center group hover:border-sky-400 transition transform hover:-translate-y-1 overflow-hidden" onclick="openBookingBook()">
                 <img src="image4.jpg" alt="Reservation Book Cover" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-black/40 z-10"></div>
 
                 <div class="relative z-20 flex flex-col items-center">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-yellow-500/20 border border-yellow-500/50 flex items-center justify-center text-yellow-400 text-2xl shadow-[0_0_25px_rgba(234,179,8,0.5)] group-hover:scale-110 transition">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-sky-500/20 border border-sky-500/50 flex items-center justify-center text-sky-400 text-2xl shadow-[0_0_25px_rgba(56,189,248,0.5)] group-hover:scale-110 transition">
                         <i class="fa-solid fa-book-open"></i>
                     </div>
-                    <span class="text-yellow-400 font-bold text-xs uppercase tracking-widest block mb-1">Interactive Reservation Book</span>
+                    <span class="text-sky-400 font-bold text-xs uppercase tracking-widest block mb-1">Interactive Reservation Book</span>
                     <h2 class="text-2xl sm:text-4xl font-extrabold text-white mb-2">Book a Dining Table</h2>
                     <p class="text-islandSand/90 text-xs sm:text-sm max-w-md mx-auto mb-6">Tap here to open the reservation book and secure your spot.</p>
-                    <button class="bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-islandDark px-8 py-3 rounded-full font-extrabold hover:opacity-90 transition shadow-lg shadow-yellow-500/30 text-sm sm:text-base inline-flex items-center space-x-2">
+                    <button class="bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark px-8 py-3 rounded-full font-extrabold hover:opacity-90 transition shadow-lg shadow-sky-500/30 text-sm sm:text-base inline-flex items-center space-x-2">
                         <i class="fa-solid fa-hand-pointer"></i> <span>Open Booking Book</span>
                     </button>
                 </div>
             </div>
 
             <!-- Opened Book Form State -->
-            <div id="book-form-state" class="hidden magic-book bg-[#142517]/95 backdrop-blur-xl p-6 sm:p-10 rounded-3xl border-2 border-yellow-500 shadow-[0_30px_70px_rgba(234,179,8,0.35)] w-full relative">
-                <button onclick="closeBookingBook()" class="absolute top-4 right-4 text-islandSand/70 hover:text-yellow-400 text-xl p-2 transition" title="Close Book">
+            <div id="book-form-state" class="hidden magic-book bg-[#10242b]/95 backdrop-blur-xl p-6 sm:p-10 rounded-3xl border-2 border-sky-400 shadow-[0_30px_70px_rgba(56,189,248,0.35)] w-full relative">
+                <button onclick="closeBookingBook()" class="absolute top-4 right-4 text-islandSand/70 hover:text-sky-400 text-xl p-2 transition" title="Close Book">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
 
                 <div class="text-center mb-6">
-                    <span class="text-yellow-400 font-bold text-xs uppercase tracking-widest block mb-1">🌿 Island Vibez</span>
+                    <span class="text-sky-400 font-bold text-xs uppercase tracking-widest block mb-1">🌿 Island Vibez</span>
                     <h2 class="text-2xl sm:text-3xl font-bold text-white mb-1">Table Reservation Form</h2>
                     <p class="text-islandSand/80 text-xs sm:text-sm">Fill out your details below to confirm your dining experience.</p>
                 </div>
@@ -435,22 +445,22 @@
                 <form id="booking-form" onsubmit="handleBooking(event)" class="space-y-4 sm:space-y-5">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-1.5 text-yellow-400">Full Name</label>
-                            <input type="text" id="book-name" required class="w-full bg-black/60 border border-yellow-500/40 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 text-sm shadow-inner" placeholder="John Doe">
+                            <label class="block text-xs font-semibold uppercase tracking-wider mb-1.5 text-sky-400">Full Name</label>
+                            <input type="text" id="book-name" required class="w-full bg-black/60 border border-sky-500/40 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-sky-400 text-sm shadow-inner" placeholder="John Doe">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-1.5 text-yellow-400">Phone Number</label>
-                            <input type="tel" id="book-phone" required class="w-full bg-black/60 border border-yellow-500/40 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 text-sm shadow-inner" placeholder="+1 (876) 000-0000">
+                            <label class="block text-xs font-semibold uppercase tracking-wider mb-1.5 text-sky-400">Phone Number</label>
+                            <input type="tel" id="book-phone" required class="w-full bg-black/60 border border-sky-500/40 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-sky-400 text-sm shadow-inner" placeholder="+1 (876) 000-0000">
                         </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-1.5 text-yellow-400">Date</label>
-                            <input type="date" id="book-date" required class="w-full bg-black/60 border border-yellow-500/40 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm shadow-inner">
+                            <label class="block text-xs font-semibold uppercase tracking-wider mb-1.5 text-sky-400">Date</label>
+                            <input type="date" id="book-date" required class="w-full bg-black/60 border border-sky-500/40 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-400 text-sm shadow-inner">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-1.5 text-yellow-400">Time Slot</label>
-                            <select id="book-time" required class="w-full bg-black/60 border border-yellow-500/40 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm shadow-inner">
+                            <label class="block text-xs font-semibold uppercase tracking-wider mb-1.5 text-sky-400">Time Slot</label>
+                            <select id="book-time" required class="w-full bg-black/60 border border-sky-500/40 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-400 text-sm shadow-inner">
                                 <option value="" disabled selected class="bg-islandDark text-white">Select a time</option>
                                 <option value="5:00 PM" class="bg-islandDark text-white">5:00 PM</option>
                                 <option value="5:30 PM" class="bg-islandDark text-white">5:30 PM</option>
@@ -467,8 +477,8 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider mb-1.5 text-yellow-400">Guests</label>
-                            <select id="book-guests" class="w-full bg-black/60 border border-yellow-500/40 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm shadow-inner">
+                            <label class="block text-xs font-semibold uppercase tracking-wider mb-1.5 text-sky-400">Guests</label>
+                            <select id="book-guests" class="w-full bg-black/60 border border-sky-500/40 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-400 text-sm shadow-inner">
                                 <option value="1 Person" class="bg-islandDark text-white">1 Person</option>
                                 <option value="2 People" selected class="bg-islandDark text-white">2 People</option>
                                 <option value="4 People" class="bg-islandDark text-white">4 People</option>
@@ -476,34 +486,34 @@
                             </select>
                         </div>
                     </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-islandDark py-3.5 rounded-xl font-extrabold hover:opacity-90 transition shadow-lg shadow-yellow-500/30 text-base">Confirm Table Booking</button>
+                    <button type="submit" class="w-full bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark py-3.5 rounded-xl font-extrabold hover:opacity-90 transition shadow-lg shadow-sky-500/30 text-base">Confirm Table Booking</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- EVENT SPACE RENTAL SECTION (Updated to Green, Yellow, Red Theme) -->
-    <section id="events" class="py-14 px-4 sm:px-6 relative bg-gradient-to-b from-[#0b1114] via-[#241710] to-[#0b1114] border-y border-yellow-500/20 w-full">
-        <div class="max-w-3xl mx-auto bg-black/70 backdrop-blur-md p-6 sm:p-10 rounded-3xl border border-yellow-500/40 shadow-2xl relative z-20">
+    <!-- EVENT SPACE RENTAL SECTION -->
+    <section id="events" class="py-14 px-4 sm:px-6 relative bg-gradient-to-b from-[#0b1114] via-[#241c10] to-[#0b1114] border-y border-sky-500/20 w-full">
+        <div class="max-w-3xl mx-auto bg-black/70 backdrop-blur-md p-6 sm:p-10 rounded-3xl border border-sky-500/40 shadow-2xl relative z-20">
             <div class="text-center mb-6">
-                <span class="text-yellow-400 font-bold text-xs uppercase tracking-widest block mb-2"><i class="fa-solid fa-champagne-glasses"></i> Exclusive Venue Booking</span>
+                <span class="text-sky-400 font-bold text-xs uppercase tracking-widest block mb-2"><i class="fa-solid fa-champagne-glasses"></i> Exclusive Venue Booking</span>
                 <h2 class="text-2xl sm:text-4xl font-extrabold text-white mb-2">Event Space Rental</h2>
                 <p class="text-islandSand/80 text-sm sm:text-base">Host your celebrations, functions, and meetings in our fully air-conditioned private space.</p>
             </div>
 
-            <div class="mb-6 rounded-2xl overflow-hidden border-2 border-yellow-500/40 shadow-[0_15px_35px_rgba(234,179,8,0.25)] relative group cursor-pointer" onclick="openLightbox('image5.jpg')">
+            <div class="mb-6 rounded-2xl overflow-hidden border-2 border-sky-500/40 shadow-[0_15px_35px_rgba(56,189,248,0.25)] relative group cursor-pointer" onclick="openLightbox('image5.jpg')">
                 <img src="image5.jpg" alt="Exclusive Event Space" class="w-full h-52 sm:h-64 object-cover group-hover:scale-105 transition duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90 flex items-end p-5">
                     <div>
-                        <span class="text-yellow-400 font-bold text-xs uppercase tracking-wider block mb-1"><i class="fa-solid fa-camera-retro"></i> Luxury Venue Showcase</span>
+                        <span class="text-sky-400 font-bold text-xs uppercase tracking-wider block mb-1"><i class="fa-solid fa-camera-retro"></i> Luxury Venue Showcase</span>
                         <h3 class="text-white font-bold text-lg sm:text-xl">Private Air-Conditioned Event Lounge</h3>
                     </div>
                 </div>
             </div>
 
             <div class="mb-5">
-                <label class="block text-sm font-semibold mb-2 text-yellow-400">Select Event Type</label>
-                <select id="event-type-select" onchange="toggleEventDetails()" class="w-full bg-black/80 border border-yellow-500/50 rounded-xl px-4 py-3.5 text-white font-medium focus:outline-none focus:border-yellow-400 text-sm sm:text-base shadow-inner">
+                <label class="block text-sm font-semibold mb-2 text-sky-400">Select Event Type</label>
+                <select id="event-type-select" onchange="toggleEventDetails()" class="w-full bg-black/80 border border-sky-500/50 rounded-xl px-4 py-3.5 text-white font-medium focus:outline-none focus:border-sky-400 text-sm sm:text-base shadow-inner">
                     <option value="" disabled selected class="bg-islandDark text-white">-- Choose an Event to View Info & Sign Up --</option>
                     <option value="Office Party" class="bg-islandDark text-white">Office Party</option>
                     <option value="Baby Shower" class="bg-islandDark text-white">Baby Shower</option>
@@ -515,14 +525,14 @@
             </div>
 
             <div id="event-details-container" class="hidden space-y-5 pt-4 border-t border-white/10">
-                <div class="bg-yellow-500/10 border border-yellow-500/30 p-4 sm:p-5 rounded-2xl text-sm sm:text-base text-islandSand space-y-2">
-                    <div class="flex justify-between items-center font-bold text-white border-b border-yellow-500/20 pb-2">
-                        <span id="display-event-title" class="text-yellow-400 text-lg">Event Space Rental</span>
-                        <span class="bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-islandDark px-3 py-1 rounded-full text-xs font-extrabold">JMD $45,000 (Space Only)</span>
+                <div class="bg-sky-500/10 border border-sky-500/30 p-4 sm:p-5 rounded-2xl text-sm sm:text-base text-islandSand space-y-2">
+                    <div class="flex justify-between items-center font-bold text-white border-b border-sky-500/20 pb-2">
+                        <span id="display-event-title" class="text-sky-400 text-lg">Event Space Rental</span>
+                        <span class="bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark px-3 py-1 rounded-full text-xs font-extrabold">JMD $45,000 (Space Only)</span>
                     </div>
                     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-xs sm:text-sm">
                         <li><i class="fa-solid fa-check text-green-400 mr-2"></i> Your Own Private Space</li>
-                        <li><i class="fa-solid fa-check text-yellow-400 mr-2"></i> One Bar Included</li>
+                        <li><i class="fa-solid fa-check text-sky-400 mr-2"></i> One Bar Included</li>
                         <li><i class="fa-solid fa-check text-red-400 mr-2"></i> Fully Air-Conditioned</li>
                     </ul>
                     <p class="text-xs text-islandCoral/90 italic pt-1">* Note: Food, drinks, and decor are not included in the space rental fee.</p>
@@ -532,24 +542,24 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-islandSand/80 mb-1">Full Name</label>
-                            <input type="text" id="event-name" required placeholder="John Doe" class="w-full bg-black/70 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-yellow-400">
+                            <input type="text" id="event-name" required placeholder="John Doe" class="w-full bg-black/70 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-sky-400">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-islandSand/80 mb-1">Phone Number</label>
-                            <input type="tel" id="event-phone" required placeholder="+1 (876) 000-0000" class="w-full bg-black/70 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-yellow-400">
+                            <input type="tel" id="event-phone" required placeholder="+1 (876) 000-0000" class="w-full bg-black/70 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-sky-400">
                         </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-islandSand/80 mb-1">Event Date</label>
-                            <input type="date" id="event-date" required class="w-full bg-black/70 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-yellow-400">
+                            <input type="date" id="event-date" required class="w-full bg-black/70 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-sky-400">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-islandSand/80 mb-1">Estimated Guests</label>
-                            <input type="number" id="event-guests" required min="1" placeholder="e.g. 30" class="w-full bg-black/70 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-yellow-400">
+                            <input type="number" id="event-guests" required min="1" placeholder="e.g. 30" class="w-full bg-black/70 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-sky-400">
                         </div>
                     </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-islandDark py-3.5 rounded-xl font-extrabold hover:opacity-90 transition shadow-lg shadow-yellow-500/30 text-base flex items-center justify-center space-x-2">
+                    <button type="submit" class="w-full bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark py-3.5 rounded-xl font-extrabold hover:opacity-90 transition shadow-lg shadow-sky-500/30 text-base flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-lock"></i> <span>Pay Deposit & Book Event Space</span>
                     </button>
                 </form>
@@ -561,27 +571,27 @@
     <section id="gallery" class="py-14 overflow-hidden w-full">
         <div class="text-center mb-6 px-4">
             <h2 class="text-3xl sm:text-4xl font-bold text-white mb-2">Island Gallery</h2>
-            <p class="text-yellow-400 text-sm sm:text-base">Click any image to view in full size</p>
+            <p class="text-sky-400 text-sm sm:text-base">Click any image to view in full size</p>
         </div>
         
         <div class="relative w-full overflow-hidden">
             <div class="animate-marquee flex space-x-4 py-2">
-                <div onclick="openLightbox('image1.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-yellow-500/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
+                <div onclick="openLightbox('image1.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-sky-500/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
                     <img src="image1.jpg" alt="Gallery 1" class="w-full h-full object-cover">
                 </div>
-                <div onclick="openLightbox('image2.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-yellow-500/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
+                <div onclick="openLightbox('image2.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-sky-500/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
                     <img src="image2.jpg" alt="Gallery 2" class="w-full h-full object-cover">
                 </div>
-                <div onclick="openLightbox('image3.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-yellow-500/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
+                <div onclick="openLightbox('image3.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-sky-500/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
                     <img src="image3.jpg" alt="Gallery 3" class="w-full h-full object-cover">
                 </div>
-                <div onclick="openLightbox('image1.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-yellow-500/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
+                <div onclick="openLightbox('image1.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-sky-500/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
                     <img src="image1.jpg" alt="Gallery 1" class="w-full h-full object-cover">
                 </div>
-                <div onclick="openLightbox('image2.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-yellow-500/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
+                <div onclick="openLightbox('image2.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-sky-500/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
                     <img src="image2.jpg" alt="Gallery 2" class="w-full h-full object-cover">
                 </div>
-                <div onclick="openLightbox('image3.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-yellow-500/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
+                <div onclick="openLightbox('image3.jpg')" class="w-64 sm:w-80 h-48 sm:h-60 rounded-xl overflow-hidden border border-sky-500/30 shadow-lg cursor-pointer flex-shrink-0 transition transform hover:scale-105">
                     <img src="image3.jpg" alt="Gallery 3" class="w-full h-full object-cover">
                 </div>
             </div>
@@ -591,33 +601,33 @@
     <!-- Gallery Lightbox Modal -->
     <div id="lightbox-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden" onclick="closeLightbox()">
         <div class="relative max-w-4xl max-h-[90vh] flex items-center justify-center" onclick="event.stopPropagation()">
-            <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white hover:text-yellow-400 text-3xl p-2 focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
-            <img id="lightbox-img" src="#" alt="Enlarged View" class="max-w-full max-h-[85vh] object-contain rounded-xl border border-yellow-500/40 shadow-2xl">
+            <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white hover:text-sky-400 text-3xl p-2 focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
+            <img id="lightbox-img" src="#" alt="Enlarged View" class="max-w-full max-h-[85vh] object-contain rounded-xl border border-sky-500/40 shadow-2xl">
         </div>
     </div>
 
     <!-- Customer Reviews Section -->
-    <section id="reviews" class="py-14 px-4 sm:px-6 bg-gradient-to-b from-[#0b1114] via-[#101c13] to-[#0b1114] border-t border-white/10 w-full">
+    <section id="reviews" class="py-14 px-4 sm:px-6 bg-gradient-to-b from-[#0b1114] via-[#0b1c20] to-[#0b1114] border-t border-white/10 w-full">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-8">
-                <span class="text-yellow-400 font-bold text-xs uppercase tracking-widest block mb-2"><i class="fa-solid fa-comments"></i> Customer Feedback</span>
+                <span class="text-sky-400 font-bold text-xs uppercase tracking-widest block mb-2"><i class="fa-solid fa-comments"></i> Customer Feedback</span>
                 <h2 class="text-3xl sm:text-4xl font-bold text-white mb-2">Customer Reviews</h2>
                 <p class="text-islandSand/80 text-sm sm:text-base">Read what our guests have to say or share your own experience!</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                <div class="bg-black/60 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-yellow-500/30 shadow-xl">
+                <div class="bg-black/60 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-sky-500/30 shadow-xl">
                     <h3 class="text-xl font-bold text-white mb-4 flex items-center space-x-2">
-                        <i class="fa-solid fa-pen-to-square text-yellow-400"></i> <span>Write a Review</span>
+                        <i class="fa-solid fa-pen-to-square text-sky-400"></i> <span>Write a Review</span>
                     </h3>
                     <form id="review-form" onsubmit="handleReviewSubmit(event)" class="space-y-4">
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-islandSand/80 mb-1">Your Name</label>
-                            <input type="text" id="review-name" required placeholder="Jane Doe" class="w-full bg-black/50 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-yellow-400">
+                            <input type="text" id="review-name" required placeholder="Jane Doe" class="w-full bg-black/50 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-sky-400">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-islandSand/80 mb-1">Rating</label>
-                            <select id="review-rating" class="w-full bg-black/50 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-yellow-400">
+                            <select id="review-rating" class="w-full bg-black/50 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-sky-400">
                                 <option value="5" class="bg-islandDark text-white">⭐⭐⭐⭐⭐ (5/5 - Excellent)</option>
                                 <option value="4" class="bg-islandDark text-white">⭐⭐⭐⭐ (4/5 - Great)</option>
                                 <option value="3" class="bg-islandDark text-white">⭐⭐⭐ (3/5 - Good)</option>
@@ -627,28 +637,28 @@
                         </div>
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-islandSand/80 mb-1">Your Review</label>
-                            <textarea id="review-comment" required rows="3" placeholder="Tell us about the food, drinks, and vibe..." class="w-full bg-black/50 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-yellow-400 resize-none"></textarea>
+                            <textarea id="review-comment" required rows="3" placeholder="Tell us about the food, drinks, and vibe..." class="w-full bg-black/50 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-sky-400 resize-none"></textarea>
                         </div>
-                        <button type="submit" id="review-submit-btn" class="w-full bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-islandDark py-3.5 rounded-xl font-extrabold hover:opacity-90 transition shadow-lg text-base">Submit Review</button>
+                        <button type="submit" id="review-submit-btn" class="w-full bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark py-3.5 rounded-xl font-extrabold hover:opacity-90 transition shadow-lg text-base">Submit Review</button>
                     </form>
                 </div>
 
                 <div class="space-y-4">
                     <h3 class="text-xl font-bold text-white mb-4 flex items-center space-x-2">
-                        <i class="fa-solid fa-star text-yellow-400"></i> <span>Recent Reviews</span>
+                        <i class="fa-solid fa-star text-sky-400"></i> <span>Recent Reviews</span>
                     </h3>
                     <div id="reviews-container" class="space-y-4 max-h-[420px] overflow-y-auto pr-1">
                         <div class="bg-black/40 backdrop-blur-md p-4 rounded-2xl border border-white/10">
                             <div class="flex justify-between items-center mb-1">
                                 <strong class="text-white text-sm">Marcus S.</strong>
-                                <span class="text-yellow-400 text-xs">⭐⭐⭐⭐⭐</span>
+                                <span class="text-sky-400 text-xs">⭐⭐⭐⭐⭐</span>
                             </div>
                             <p class="text-islandSand/80 text-xs sm:text-sm">Amazing food and top-tier service! The oxtail pasta is an absolute must-try.</p>
                         </div>
                         <div class="bg-black/40 backdrop-blur-md p-4 rounded-2xl border border-white/10">
                             <div class="flex justify-between items-center mb-1">
                                 <strong class="text-white text-sm">Keisha M.</strong>
-                                <span class="text-yellow-400 text-xs">⭐⭐⭐⭐⭐</span>
+                                <span class="text-sky-400 text-xs">⭐⭐⭐⭐⭐</span>
                             </div>
                             <p class="text-islandSand/80 text-xs sm:text-sm">Great atmosphere, wonderful music, and delicious cocktails right on Constant Spring Road!</p>
                         </div>
@@ -665,12 +675,12 @@
                 <h2 class="text-3xl font-bold text-white mb-4">Find Us</h2>
                 <p class="text-islandSand/80 mb-6 text-sm sm:text-base">Visit us at our Kingston location for incredible food and vibrant ambiance. Get directions straight to our restaurant.</p>
                 <div class="space-y-4 text-sm sm:text-base">
-                    <p class="flex items-center space-x-3"><i class="fa-solid fa-location-dot text-yellow-400 text-lg min-w-[20px]"></i> <span>195 Constant Spring Rd, Kingston, Jamaica</span></p>
-                    <p class="flex items-center space-x-3"><i class="fa-solid fa-phone text-yellow-400 text-lg min-w-[20px]"></i> <span>+1 (876) 555-VIBE</span></p>
-                    <p class="flex items-center space-x-3"><i class="fa-solid fa-clock text-yellow-400 text-lg min-w-[20px]"></i> <span>Mon - Sun: 11:00 AM - 11:00 PM</span></p>
+                    <p class="flex items-center space-x-3"><i class="fa-solid fa-location-dot text-sky-400 text-lg min-w-[20px]"></i> <span>195 Constant Spring Rd, Kingston, Jamaica</span></p>
+                    <p class="flex items-center space-x-3"><i class="fa-solid fa-phone text-sky-400 text-lg min-w-[20px]"></i> <span>+1 (876) 555-VIBE</span></p>
+                    <p class="flex items-center space-x-3"><i class="fa-solid fa-clock text-sky-400 text-lg min-w-[20px]"></i> <span>Mon - Sun: 11:00 AM - 11:00 PM</span></p>
                 </div>
             </div>
-            <div class="h-72 sm:h-80 rounded-2xl overflow-hidden border border-yellow-500/30 shadow-2xl w-full">
+            <div class="h-72 sm:h-80 rounded-2xl overflow-hidden border border-sky-500/30 shadow-2xl w-full">
                 <iframe class="w-full h-full border-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3793.8!2d-76.8145!3d18.0242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8edb312781b2bf1d%3A0x7d6f552e80e6c382!2s195%20Constant%20Spring%20Rd%2C%20Kingston!5e0!3m2!1sen!2sjm!4v1650000000000!5m2!1sen!2sjm" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
@@ -678,22 +688,22 @@
 
     <!-- Protected Admin Modal -->
     <div id="admin-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-islandDark w-full max-w-2xl p-6 sm:p-8 rounded-2xl border border-yellow-500/40 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <div class="bg-islandDark w-full max-w-2xl p-6 sm:p-8 rounded-2xl border border-sky-500/40 shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-2"><i class="fa-solid fa-xmark"></i></button>
             
-            <h2 class="text-2xl font-bold text-yellow-400 mb-2 flex items-center space-x-2">
+            <h2 class="text-2xl font-bold text-sky-400 mb-2 flex items-center space-x-2">
                 <i class="fa-solid fa-lock"></i> <span>Restaurant Admin Panel</span>
             </h2>
             <p class="text-sm text-islandSand/70 mb-6">Add new menu items with custom images via Firebase or delete existing ones.</p>
 
             <form id="add-menu-form" onsubmit="handleAddMenuItem(event)" class="space-y-4 mb-8 pb-8 border-b border-white/10">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <input type="text" id="admin-title" placeholder="Food Name" required class="bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-yellow-400 text-sm sm:text-base">
-                    <input type="text" id="admin-price" placeholder="Price (e.g. $2,500)" required class="bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-yellow-400 text-sm sm:text-base">
+                    <input type="text" id="admin-title" placeholder="Food Name" required class="bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-sky-400 text-sm sm:text-base">
+                    <input type="text" id="admin-price" placeholder="Price (e.g. $2,500)" required class="bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-sky-400 text-sm sm:text-base">
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <input type="text" id="admin-desc" placeholder="Short Description" required class="bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-yellow-400 text-sm sm:text-base">
-                    <select id="admin-category" class="bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-yellow-400 text-sm sm:text-base">
+                    <input type="text" id="admin-desc" placeholder="Short Description" required class="bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-sky-400 text-sm sm:text-base">
+                    <select id="admin-category" class="bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-sky-400 text-sm sm:text-base">
                         <option value="dinner">Dinner</option>
                         <option value="drinks">Drinks</option>
                         <option value="cocktail">Cocktail</option>
@@ -701,9 +711,9 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium mb-1 text-islandSand/80">Menu Item Image</label>
-                    <input type="file" id="admin-image" accept="image/*" required class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-yellow-500 file:text-islandDark hover:file:opacity-90 transition">
+                    <input type="file" id="admin-image" accept="image/*" required class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-sky-500 file:text-islandDark hover:file:opacity-90 transition">
                 </div>
-                <button type="submit" id="admin-submit-btn" class="w-full bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-islandDark py-3.5 rounded-lg font-extrabold hover:opacity-90 transition shadow-lg text-base">Upload & Add Menu Item</button>
+                <button type="submit" id="admin-submit-btn" class="w-full bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark py-3.5 rounded-lg font-extrabold hover:opacity-90 transition shadow-lg text-base">Upload & Add Menu Item</button>
             </form>
 
             <h3 class="text-lg font-bold mb-4">Manage Current Menu Items</h3>
@@ -712,9 +722,9 @@
     </div>
 
     <!-- Order Drawer -->
-    <div id="cart-drawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-islandDark border-l border-yellow-500/30 z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-islandDark border-l border-sky-500/30 z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
         <div class="p-6 border-b border-white/10 flex justify-between items-center">
-            <h3 class="text-xl font-bold text-yellow-400 flex items-center space-x-2">
+            <h3 class="text-xl font-bold text-sky-400 flex items-center space-x-2">
                 <i class="fa-solid fa-burger"></i> <span>Food Delivery Order</span>
             </h3>
             <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-white text-xl p-2"><i class="fa-solid fa-xmark"></i></button>
@@ -722,28 +732,28 @@
         <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
         <div class="p-6 border-t border-white/10 bg-black/40 space-y-4">
             <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-yellow-400 mb-2">Fulfillment Option</label>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-sky-400 mb-2">Fulfillment Option</label>
                 <div class="grid grid-cols-2 gap-2">
-                    <button type="button" id="option-delivery" onclick="setFulfillmentType('delivery')" class="py-2.5 rounded-lg font-bold text-sm bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-islandDark transition shadow">Delivery</button>
+                    <button type="button" id="option-delivery" onclick="setFulfillmentType('delivery')" class="py-2.5 rounded-lg font-bold text-sm bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark transition shadow">Delivery</button>
                     <button type="button" id="option-pickup" onclick="setFulfillmentType('pickup')" class="py-2.5 rounded-lg font-bold text-sm bg-black/50 border border-white/20 text-white transition">Pickup</button>
                 </div>
             </div>
             
             <div id="delivery-location-container">
                 <label class="block text-xs font-semibold uppercase tracking-wider text-islandSand/80 mb-1">Delivery Location</label>
-                <input type="text" id="customer-location" placeholder="Enter street address / parish" class="w-full bg-black/50 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-yellow-400">
+                <input type="text" id="customer-location" placeholder="Enter street address / parish" class="w-full bg-black/50 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-sky-400">
             </div>
 
             <div>
                 <label class="block text-xs font-semibold uppercase tracking-wider text-islandSand/80 mb-1">Phone Number</label>
-                <input type="tel" id="customer-phone" placeholder="+1 (876) 000-0000" class="w-full bg-black/50 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-yellow-400">
+                <input type="tel" id="customer-phone" placeholder="+1 (876) 000-0000" class="w-full bg-black/50 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-sky-400">
             </div>
 
             <div class="flex justify-between pt-2 text-lg font-bold">
                 <span>Total:</span>
-                <span id="cart-total" class="text-yellow-400">$0.00</span>
+                <span id="cart-total" class="text-sky-400">$0.00</span>
             </div>
-            <button onclick="proceedToWiPay()" class="w-full bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-islandDark py-3.5 rounded-xl font-extrabold hover:opacity-90 transition shadow-lg text-base">Pay</button>
+            <button onclick="proceedToWiPay()" class="w-full bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark py-3.5 rounded-xl font-extrabold hover:opacity-90 transition shadow-lg text-base">Pay</button>
         </div>
     </div>
 
@@ -751,7 +761,7 @@
     <footer class="py-10 px-6 bg-black text-center border-t border-white/10 w-full">
         <div class="flex justify-center space-x-6 mb-4 text-2xl">
             <a href="https://instagram.com" target="_blank" class="text-green-400 hover:text-white transition p-2"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://wa.me/18765558423" target="_blank" class="text-yellow-400 hover:text-white transition p-2"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://wa.me/18765558423" target="_blank" class="text-sky-400 hover:text-white transition p-2"><i class="fa-brands fa-whatsapp"></i></a>
             <a href="https://tiktok.com" target="_blank" class="text-red-400 hover:text-white transition p-2"><i class="fa-brands fa-tiktok"></i></a>
         </div>
         <p class="text-sm text-islandSand/60">&copy; 2026 All rights reserved. Site by MS Media.</p>
@@ -783,11 +793,11 @@
             const locationContainer = document.getElementById('delivery-location-container');
 
             if (type === 'delivery') {
-                btnDelivery.className = "py-2.5 rounded-lg font-bold text-sm bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-islandDark transition shadow";
+                btnDelivery.className = "py-2.5 rounded-lg font-bold text-sm bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark transition shadow";
                 btnPickup.className = "py-2.5 rounded-lg font-bold text-sm bg-black/50 border border-white/20 text-white transition";
                 locationContainer.style.display = 'block';
             } else {
-                btnPickup.className = "py-2.5 rounded-lg font-bold text-sm bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-islandDark transition shadow";
+                btnPickup.className = "py-2.5 rounded-lg font-bold text-sm bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark transition shadow";
                 btnDelivery.className = "py-2.5 rounded-lg font-bold text-sm bg-black/50 border border-white/20 text-white transition";
                 locationContainer.style.display = 'none';
             }
@@ -798,9 +808,9 @@
             ['dinner', 'drinks', 'cocktail'].forEach(cat => {
                 const btn = document.getElementById(`tab-${cat}`);
                 if (cat === category) {
-                    btn.className = "card-3d px-2 sm:px-10 py-3 sm:py-3.5 rounded-2xl font-extrabold text-xs sm:text-lg bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 text-islandDark transition shadow-[0_10px_30px_rgba(234,179,8,0.4)] flex flex-col sm:flex-row items-center justify-center sm:space-x-2.5 scale-105 text-center";
+                    btn.className = "card-3d px-2 sm:px-10 py-3 sm:py-3.5 rounded-2xl font-extrabold text-xs sm:text-lg bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark transition shadow-[0_10px_30px_rgba(56,189,248,0.4)] flex flex-col sm:flex-row items-center justify-center sm:space-x-2.5 scale-105 text-center";
                 } else {
-                    btn.className = "card-3d px-2 sm:px-10 py-3 sm:py-3.5 rounded-2xl font-extrabold text-xs sm:text-lg bg-black/70 border-2 border-yellow-500 text-yellow-400 transition shadow-[0_10px_25px_rgba(234,179,8,0.25)] flex flex-col sm:flex-row items-center justify-center sm:space-x-2.5 text-center";
+                    btn.className = "card-3d px-2 sm:px-10 py-3 sm:py-3.5 rounded-2xl font-extrabold text-xs sm:text-lg bg-black/70 border-2 border-sky-400 text-sky-400 transition shadow-[0_10px_25px_rgba(56,189,248,0.25)] flex flex-col sm:flex-row items-center justify-center sm:space-x-2.5 text-center";
                 }
             });
             renderMenu();
@@ -926,8 +936,8 @@
 
             if (!currentCategory) {
                 menuGrid.innerHTML = `
-                    <div class="col-span-2 text-center py-12 px-4 bg-black/40 backdrop-blur-md rounded-3xl border border-yellow-500/30 shadow-2xl">
-                        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-yellow-500/10 border border-yellow-500/40 flex items-center justify-center text-yellow-400 text-2xl shadow-[0_0_20px_rgba(234,179,8,0.3)] animate-bounce">
+                    <div class="col-span-2 text-center py-12 px-4 bg-black/40 backdrop-blur-md rounded-3xl border border-sky-500/30 shadow-2xl">
+                        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-sky-500/10 border border-sky-500/40 flex items-center justify-center text-sky-400 text-2xl shadow-[0_0_20px_rgba(56,189,248,0.3)] animate-bounce">
                             <i class="fa-solid fa-utensils"></i>
                         </div>
                         <h3 class="text-xl sm:text-2xl font-bold text-white mb-2">Discover Our Island Flavors</h3>
@@ -941,14 +951,14 @@
 
             if (filteredItems.length === 0) {
                 menuGrid.innerHTML = `
-                    <div class="col-span-2 text-center py-12 px-4 bg-black/40 backdrop-blur-md rounded-3xl border border-yellow-500/30 shadow-xl">
+                    <div class="col-span-2 text-center py-12 px-4 bg-black/40 backdrop-blur-md rounded-3xl border border-sky-500/30 shadow-xl">
                         <p class="text-islandSand/80 text-base">No items available in this category right now. Check back soon!</p>
                     </div>
                 `;
             } else {
                 filteredItems.forEach(item => {
                     menuGrid.innerHTML += `
-                        <div class="menu-watermark card-3d bg-black/60 border border-yellow-500/30 rounded-2xl shadow-xl overflow-hidden flex flex-col justify-between backdrop-blur-sm">
+                        <div class="menu-watermark card-3d bg-black/60 border border-sky-500/30 rounded-2xl shadow-xl overflow-hidden flex flex-col justify-between backdrop-blur-sm">
                             <div class="h-28 sm:h-52 overflow-hidden bg-black/40">
                                 <img src="${item.imageUrl || 'logo.png'}" alt="${item.title}" class="w-full h-full object-cover">
                             </div>
@@ -956,11 +966,11 @@
                                 <div>
                                     <div class="flex flex-col sm:flex-row justify-between items-start mb-1 sm:mb-2">
                                         <h3 class="text-sm sm:text-xl font-bold text-white leading-snug">${item.title}</h3>
-                                        <span class="text-yellow-400 font-bold text-xs sm:text-lg mt-1 sm:mt-0">${item.price}</span>
+                                        <span class="text-sky-400 font-bold text-xs sm:text-lg mt-1 sm:mt-0">${item.price}</span>
                                     </div>
                                     <p class="text-islandSand/70 text-xs sm:text-sm mb-4 line-clamp-2">${item.desc}</p>
                                 </div>
-                                <button onclick="addToCart('${item.id}')" class="w-full bg-yellow-500/20 border border-yellow-400 text-yellow-400 py-2 sm:py-3 rounded-xl font-bold hover:bg-yellow-400 hover:text-islandDark transition text-xs sm:text-base">Add to Order</button>
+                                <button onclick="addToCart('${item.id}')" class="w-full bg-sky-500/20 border border-sky-400 text-sky-400 py-2 sm:py-3 rounded-xl font-bold hover:bg-sky-400 hover:text-islandDark transition text-xs sm:text-base">Add to Order</button>
                             </div>
                         </div>
                     `;
@@ -973,7 +983,7 @@
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-black/40 p-3 rounded-lg border border-white/10 text-sm gap-3">
                             <div class="flex items-center space-x-3">
                                 <img src="${item.imageUrl || 'logo.png'}" class="w-12 h-12 object-cover rounded-md flex-shrink-0">
-                                <div><strong class="text-white block">${item.title}</strong> <span class="text-yellow-400">${item.price} (${item.category || 'dinner'})</span></div>
+                                <div><strong class="text-white block">${item.title}</strong> <span class="text-sky-400">${item.price} (${item.category || 'dinner'})</span></div>
                             </div>
                             <button onclick="deleteMenuItem('${item.id}')" class="text-islandCoral hover:text-red-400 font-bold self-end sm:self-center"><i class="fa-solid fa-trash"></i> Delete</button>
                         </div>
@@ -991,7 +1001,7 @@
                     <div class="bg-black/40 backdrop-blur-md p-4 rounded-2xl border border-white/10">
                         <div class="flex justify-between items-center mb-1">
                             <strong class="text-white text-sm">${rev.name}</strong>
-                            <span class="text-yellow-400 text-xs">${stars}</span>
+                            <span class="text-sky-400 text-xs">${stars}</span>
                         </div>
                         <p class="text-islandSand/80 text-xs sm:text-sm">${rev.comment}</p>
                     </div>
@@ -1112,7 +1122,7 @@
                     <div class="flex justify-between items-center bg-white/5 p-3 rounded-lg">
                         <div>
                             <div class="font-bold text-white">${item.title}</div>
-                            <div class="text-xs text-yellow-400">${item.price}</div>
+                            <div class="text-xs text-sky-400">${item.price}</div>
                         </div>
                         <button onclick="removeFromCart(${index})" class="text-gray-400 hover:text-islandCoral p-2"><i class="fa-solid fa-xmark"></i></button>
                     </div>
