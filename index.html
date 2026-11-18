@@ -283,16 +283,16 @@
                 <p class="text-islandTurquoise text-sm sm:text-base">Tap a category below to explore our signature selections</p>
             </div>
 
-            <!-- 3 3D-Styled Category Tabs (Dinner, Drinks, Cocktail) -->
-            <div class="flex justify-center items-center space-x-3 sm:space-x-6 mb-8 overflow-x-auto py-2">
-                <button onclick="filterMenuCategory('dinner')" id="tab-dinner" class="card-3d px-6 sm:px-10 py-3.5 rounded-2xl font-extrabold text-sm sm:text-lg bg-black/70 border-2 border-islandTurquoise text-islandTurquoise transition shadow-[0_10px_25px_rgba(0,206,209,0.25)] flex items-center space-x-2.5">
-                    <i class="fa-solid fa-utensils"></i><span>Dinner</span>
+            <!-- 3 3D-Styled Category Tabs (Dinner, Drinks, Cocktail) - Optimized Grid layout for Mobile Screen Fit -->
+            <div class="grid grid-cols-3 gap-2 sm:flex sm:justify-center sm:items-center sm:space-x-6 mb-8 w-full px-1">
+                <button onclick="filterMenuCategory('dinner')" id="tab-dinner" class="card-3d px-2 sm:px-10 py-3 sm:py-3.5 rounded-2xl font-extrabold text-xs sm:text-lg bg-black/70 border-2 border-islandTurquoise text-islandTurquoise transition shadow-[0_10px_25px_rgba(0,206,209,0.25)] flex flex-col sm:flex-row items-center justify-center sm:space-x-2.5 text-center">
+                    <i class="fa-solid fa-utensils mb-1 sm:mb-0"></i><span>Dinner</span>
                 </button>
-                <button onclick="filterMenuCategory('drinks')" id="tab-drinks" class="card-3d px-6 sm:px-10 py-3.5 rounded-2xl font-extrabold text-sm sm:text-lg bg-black/70 border-2 border-islandTurquoise text-islandTurquoise transition shadow-[0_10px_25px_rgba(0,206,209,0.25)] flex items-center space-x-2.5">
-                    <i class="fa-solid fa-wine-glass"></i><span>Drinks</span>
+                <button onclick="filterMenuCategory('drinks')" id="tab-drinks" class="card-3d px-2 sm:px-10 py-3 sm:py-3.5 rounded-2xl font-extrabold text-xs sm:text-lg bg-black/70 border-2 border-islandTurquoise text-islandTurquoise transition shadow-[0_10px_25px_rgba(0,206,209,0.25)] flex flex-col sm:flex-row items-center justify-center sm:space-x-2.5 text-center">
+                    <i class="fa-solid fa-wine-glass mb-1 sm:mb-0"></i><span>Drinks</span>
                 </button>
-                <button onclick="filterMenuCategory('cocktail')" id="tab-cocktail" class="card-3d px-6 sm:px-10 py-3.5 rounded-2xl font-extrabold text-sm sm:text-lg bg-black/70 border-2 border-islandTurquoise text-islandTurquoise transition shadow-[0_10px_25px_rgba(0,206,209,0.25)] flex items-center space-x-2.5">
-                    <i class="fa-solid fa-martini-glass-citrus"></i><span>Cocktails</span>
+                <button onclick="filterMenuCategory('cocktail')" id="tab-cocktail" class="card-3d px-2 sm:px-10 py-3 sm:py-3.5 rounded-2xl font-extrabold text-xs sm:text-lg bg-black/70 border-2 border-islandTurquoise text-islandTurquoise transition shadow-[0_10px_25px_rgba(0,206,209,0.25)] flex flex-col sm:flex-row items-center justify-center sm:space-x-2.5 text-center">
+                    <i class="fa-solid fa-martini-glass-citrus mb-1 sm:mb-0"></i><span>Cocktails</span>
                 </button>
             </div>
 
@@ -753,9 +753,9 @@
             ['dinner', 'drinks', 'cocktail'].forEach(cat => {
                 const btn = document.getElementById(`tab-${cat}`);
                 if (cat === category) {
-                    btn.className = "card-3d px-6 sm:px-10 py-3.5 rounded-2xl font-extrabold text-sm sm:text-lg bg-islandTurquoise text-islandDark transition shadow-[0_10px_30px_rgba(0,206,209,0.4)] flex items-center space-x-2.5 scale-105";
+                    btn.className = "card-3d px-2 sm:px-10 py-3 sm:py-3.5 rounded-2xl font-extrabold text-xs sm:text-lg bg-islandTurquoise text-islandDark transition shadow-[0_10px_30px_rgba(0,206,209,0.4)] flex flex-col sm:flex-row items-center justify-center sm:space-x-2.5 scale-105 text-center";
                 } else {
-                    btn.className = "card-3d px-6 sm:px-10 py-3.5 rounded-2xl font-extrabold text-sm sm:text-lg bg-black/70 border-2 border-islandTurquoise text-islandTurquoise transition shadow-[0_10px_25px_rgba(0,206,209,0.25)] flex items-center space-x-2.5";
+                    btn.className = "card-3d px-2 sm:px-10 py-3 sm:py-3.5 rounded-2xl font-extrabold text-xs sm:text-lg bg-black/70 border-2 border-islandTurquoise text-islandTurquoise transition shadow-[0_10px_25px_rgba(0,206,209,0.25)] flex flex-col sm:flex-row items-center justify-center sm:space-x-2.5 text-center";
                 }
             });
             renderMenu();
