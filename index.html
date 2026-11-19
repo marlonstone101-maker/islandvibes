@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Island Vibe | Restaurant & Lounge</title>
+    <title>Island Vibe Seafood | Restaurant & Lounge</title>
     <!-- Tailwind CSS CDN for rapid styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Firebase SDKs -->
+    <!-- Firebase SDKs (Compat Version for seamless script usage) -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
@@ -121,6 +121,22 @@
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             transform-style: preserve-3d;
         }
+
+        /* Floating Add to Cart Tag */
+        @keyframes floatTagUp {
+            0% { opacity: 0; transform: translate(-50%, 10px) scale(0.95); }
+            15% { opacity: 1; transform: translate(-50%, 0px) scale(1); }
+            85% { opacity: 1; transform: translate(-50%, -10px) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -18px) scale(0.95); }
+        }
+        .floating-add-tag {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            z-index: 60;
+            pointer-events: none;
+            animation: floatTagUp 1.4s ease forwards;
+        }
     </style>
 </head>
 <body class="bg-islandDark text-islandSand font-sans antialiased relative selection:bg-sky-400 selection:text-islandDark">
@@ -166,7 +182,7 @@
 
         <!-- Center: Logo -->
         <div class="flex items-center">
-            <a href="#home" onclick="jumpToSection(event, 'home')"><img src="logo.png" alt="Island Vibe Logo" class="w-12 h-12 sm:w-14 sm:h-14 object-contain rounded-full border border-sky-400 shadow-[0_0_20px_rgba(56,189,248,0.5)]"></a>
+            <a href="#home" onclick="jumpToSection(event, 'home')"><img src="logo.png" alt="Island Vibe Seafood Logo" class="w-12 h-12 sm:w-14 sm:h-14 object-contain rounded-full border border-sky-400 shadow-[0_0_20px_rgba(56,189,248,0.5)]"></a>
         </div>
 
         <!-- Right: Cart Button (Green, Sky Blue, Yellow, Red Theme) -->
@@ -177,7 +193,7 @@
             </button>
         </div>
     </nav>
-
+ 
     <!-- Slide-out Hamburger Menu Drawer -->
     <div id="mobile-menu" class="fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-islandDark/95 backdrop-blur-xl border-r border-sky-500/30 z-50 shadow-2xl transform -translate-x-full transition-transform duration-300 flex flex-col p-6 overflow-y-auto">
         <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
@@ -216,7 +232,7 @@
             <div class="perspective-container mb-6 sm:mb-8">
                 <img src="logo.png" alt="Island Vibz Logo 3D" class="flip-logo w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 object-contain drop-shadow-[0_20px_40px_rgba(56,189,248,0.7)]">
             </div>
-            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight">Welcome to <span class="text-sky-400">Island Vibz</span></h1>
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight">Welcome to <span class="text-sky-400">Island Vibz Seafood</span></h1>
             <p class="text-base sm:text-lg md:text-xl text-islandSand/90 mb-8 max-w-xl px-2">Experience authentic coastal cuisine, refreshing island drinks, and vibrant dining.</p>
             <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto px-4 sm:px-0">
                 <a href="#menu" onclick="jumpToSection(event, 'menu')" class="bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark px-8 py-3.5 rounded-full font-extrabold hover:opacity-90 transition shadow-lg text-center">Explore Menu</a>
@@ -386,12 +402,12 @@
         </div>
     </section>
 
-    <!-- EXPERIENCE ISLAND VIBEZ VIDEO SECTION -->
+    <!-- EXPERIENCE ISLAND VIBEZ SEAFOOD VIDEO SECTION -->
     <section class="py-14 px-4 sm:px-6 relative w-full bg-gradient-to-b from-[#0b1114] via-[#0b1f24] to-[#0b1114] overflow-hidden border-b border-sky-500/20">
         <div class="max-w-5xl mx-auto relative z-10">
             <div class="text-center mb-6">
                 <span class="text-sky-400 font-bold text-xs uppercase tracking-widest block mb-2"><i class="fa-solid fa-film"></i> Vibe Showcase</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-2">Experience Island Vibz</h2>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-2">Experience Island Vibz Seafood</h2>
                 <p class="text-islandSand/80 text-sm sm:text-base max-w-xl mx-auto">Take a quick cinematic look at our atmosphere, drinks, and culinary craftsmanship.</p>
             </div>
             
@@ -437,7 +453,7 @@
                 </button>
 
                 <div class="text-center mb-6">
-                    <span class="text-sky-400 font-bold text-xs uppercase tracking-widest block mb-1">🌿 Island Vibez</span>
+                    <span class="text-sky-400 font-bold text-xs uppercase tracking-widest block mb-1">🌿 Island Vibez Seafood</span>
                     <h2 class="text-2xl sm:text-3xl font-bold text-white mb-1">Table Reservation Form</h2>
                     <p class="text-islandSand/80 text-xs sm:text-sm">Fill out your details below to confirm your dining experience.</p>
                 </div>
@@ -739,8 +755,13 @@
                 </div>
             </div>
             
+            <div id="customer-name-container">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-islandSand/80 mb-1">Your Name</label>
+                <input type="text" id="customer-name" placeholder="Enter your name" class="w-full bg-black/50 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-sky-400">
+            </div>
+
             <div id="delivery-location-container">
-                <label class="block text-xs font-semibold uppercase tracking-wider text-islandSand/80 mb-1">Delivery Location</label>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-islandSand/80 mb-1">Delivery Address</label>
                 <input type="text" id="customer-location" placeholder="Enter street address / parish" class="w-full bg-black/50 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-sky-400">
             </div>
 
@@ -761,7 +782,7 @@
     <footer class="py-10 px-6 bg-black text-center border-t border-white/10 w-full">
         <div class="flex justify-center space-x-6 mb-4 text-2xl">
             <a href="https://instagram.com" target="_blank" class="text-green-400 hover:text-white transition p-2"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://wa.me/18765558423" target="_blank" class="text-sky-400 hover:text-white transition p-2"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://wa.me/18768668798" target="_blank" class="text-sky-400 hover:text-white transition p-2"><i class="fa-brands fa-whatsapp"></i></a>
             <a href="https://tiktok.com" target="_blank" class="text-red-400 hover:text-white transition p-2"><i class="fa-brands fa-tiktok"></i></a>
         </div>
         <p class="text-sm text-islandSand/60">&copy; 2026 All rights reserved. Site by MS Media.</p>
@@ -791,15 +812,18 @@
             const btnDelivery = document.getElementById('option-delivery');
             const btnPickup = document.getElementById('option-pickup');
             const locationContainer = document.getElementById('delivery-location-container');
+            const customerNameContainer = document.getElementById('customer-name-container');
 
             if (type === 'delivery') {
                 btnDelivery.className = "py-2.5 rounded-lg font-bold text-sm bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark transition shadow";
                 btnPickup.className = "py-2.5 rounded-lg font-bold text-sm bg-black/50 border border-white/20 text-white transition";
                 locationContainer.style.display = 'block';
+                customerNameContainer.style.display = 'block';
             } else {
                 btnPickup.className = "py-2.5 rounded-lg font-bold text-sm bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark transition shadow";
                 btnDelivery.className = "py-2.5 rounded-lg font-bold text-sm bg-black/50 border border-white/20 text-white transition";
                 locationContainer.style.display = 'none';
+                customerNameContainer.style.display = 'block';
             }
         }
 
@@ -844,7 +868,7 @@
 
             alert('Redirecting securely to WiPay Payment Gateway for event space deposit...');
             setTimeout(() => {
-                let eventText = `Hello Island Vibe, I would like to book the event space:%0A%0A`;
+                let eventText = `Hello Island Vibe Seafood, I would like to book the event space:%0A%0A`;
                 eventText += `*Event Type:* ${encodeURIComponent(eventType)}%0A`;
                 eventText += `*Full Name:* ${encodeURIComponent(name)}%0A`;
                 eventText += `*Phone Number:* ${encodeURIComponent(phone)}%0A`;
@@ -853,7 +877,7 @@
                 eventText += `*Package:* Space Rental Only (JMD $45,000)%0A`;
                 eventText += `*Deposit Status: Paid via WiPay*`;
 
-                const whatsappNumber = "18765558423"; 
+                const whatsappNumber = "18768668798"; // Replace with your restaurant's WhatsApp number
                 window.location.href = `https://wa.me/${whatsappNumber}?text=${eventText}`;
             }, 1500);
         }
@@ -878,13 +902,15 @@
             }
         }
 
+        // Firebase Configuration
         const firebaseConfig = {
-            apiKey: "YOUR_FIREBASE_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
+          apiKey: "AIzaSyBCpwqhsGnXLKVBBITF-yFJr6ucOgjMaCc",
+          authDomain: "island-vibz-seafood.firebaseapp.com",
+          projectId: "island-vibz-seafood",
+          storageBucket: "island-vibz-seafood.firebasestorage.app",
+          messagingSenderId: "210318087784",
+          appId: "1:210318087784:web:da05c51d27130a9f1f4ddd",
+          measurementId: "G-2RSK1CKGFT"
         };
         
         if (!firebase.apps.length) {
@@ -1067,26 +1093,33 @@
             const imageFile = document.getElementById('admin-image').files[0];
 
             const submitBtn = document.getElementById('admin-submit-btn');
-            submitBtn.innerText = "Uploading to Firebase...";
+            submitBtn.innerText = "Processing Image...";
             submitBtn.disabled = true;
 
-            try {
-                const storageRef = storage.ref(`menu_images/${Date.now()}_${imageFile.name}`);
-                const snapshot = await storageRef.put(imageFile);
-                const downloadURL = await snapshot.ref.getDownloadURL();
+            const reader = new FileReader();
+            reader.onload = async function(event) {
+                const base64Image = event.target.result;
+                try {
+                    const newItem = { title, price, desc, category, imageUrl: base64Image };
+                    const docRef = await db.collection("menuItems").add(newItem);
+                    
+                    menuItems.push({ id: docRef.id, ...newItem });
+                    renderMenu();
+                    
+                    document.getElementById('add-menu-form').reset();
+                    alert('Menu item and image successfully added!');
+                    closeAdminModal();
+                } catch (error) {
+                    alert("Failed to add item. Please try again.");
+                } finally {
+                    submitBtn.innerText = "Upload & Add Menu Item";
+                    submitBtn.disabled = false;
+                }
+            };
 
-                const newItem = { title, price, desc, category, imageUrl: downloadURL };
-                const docRef = await db.collection("menuItems").add(newItem);
-                
-                menuItems.push({ id: docRef.id, ...newItem });
-                renderMenu();
-                
-                document.getElementById('add-menu-form').reset();
-                alert('Menu item successfully added via Firebase!');
-                closeAdminModal();
-            } catch (error) {
-                alert("Failed to upload item. Please check your Firebase configuration.");
-            } finally {
+            if (imageFile) {
+                reader.readAsDataURL(imageFile);
+            } else {
                 submitBtn.innerText = "Upload & Add Menu Item";
                 submitBtn.disabled = false;
             }
@@ -1103,11 +1136,21 @@
             }
         }
 
+        function showFloatingAddToCartTag() {
+            const tag = document.createElement('div');
+            tag.className = 'floating-add-tag bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark px-5 py-2.5 rounded-full font-extrabold text-sm shadow-2xl border border-white/30 flex items-center space-x-2';
+            tag.innerHTML = '<i class="fa-solid fa-cart-plus"></i><span>Add to Cart</span>';
+            document.body.appendChild(tag);
+            setTimeout(() => {
+                tag.remove();
+            }, 1400);
+        }
+
         function addToCart(id) {
             const item = menuItems.find(m => m.id == id);
             cart.push(item);
             updateCartUI();
-            toggleCartDrawer(true);
+            showFloatingAddToCartTag();
         }
 
         function updateCartUI() {
@@ -1151,8 +1194,15 @@
                 return;
             }
 
+            const customerName = document.getElementById('customer-name').value.trim();
             const phone = document.getElementById('customer-phone').value.trim();
             const location = document.getElementById('customer-location').value.trim();
+
+            if (!customerName) {
+                alert('Please enter your name.');
+                document.getElementById('customer-name').focus();
+                return;
+            }
 
             if (!phone) {
                 alert('Please enter your phone number.');
@@ -1161,17 +1211,18 @@
             }
 
             if (currentFulfillment === 'delivery' && !location) {
-                alert('Please enter your delivery location.');
+                alert('Please enter your delivery address.');
                 document.getElementById('customer-location').focus();
                 return;
             }
 
             alert('Redirecting securely to WiPay Payment Gateway...');
             setTimeout(() => {
-                let orderText = `Hello Island Vibe, I would like to place an order:%0A`;
+                let orderText = `Hello Island Vibe Seafood, I would like to place an order:%0A`;
                 orderText += `*Fulfillment:* ${currentFulfillment.toUpperCase()}%0A`;
+                orderText += `*Name:* ${encodeURIComponent(customerName)}%0A`;
                 if (currentFulfillment === 'delivery') {
-                    orderText += `*Location:* ${encodeURIComponent(location)}%0A`;
+                    orderText += `*Address:* ${encodeURIComponent(location)}%0A`;
                 }
                 orderText += `*Phone:* ${encodeURIComponent(phone)}%0A%0A*Items:*%0A`;
                 
@@ -1180,7 +1231,7 @@
                 });
                 orderText += `%0A*Payment Status: Paid via WiPay*`;
 
-                const whatsappNumber = "18765558423"; 
+                const whatsappNumber = "18768668798"; 
                 window.location.href = `https://wa.me/${whatsappNumber}?text=${orderText}`;
             }, 1500);
         }
@@ -1193,7 +1244,7 @@
             const time = document.getElementById('book-time').value;
             const guests = document.getElementById('book-guests').value;
 
-            let bookingText = `Hello Island Vibe, I would like to book a dining table:%0A%0A`;
+            let bookingText = `Hello Island Vibe Seafood, I would like to book a dining table:%0A%0A`;
             bookingText += `*Full Name:* ${encodeURIComponent(name)}%0A`;
             bookingText += `*Phone Number:* ${encodeURIComponent(phone)}%0A`;
             bookingText += `*Date:* ${encodeURIComponent(date)}%0A`;
@@ -1201,7 +1252,7 @@
             bookingText += `*Guests:* ${encodeURIComponent(guests)}%0A%0A`;
             bookingText += `Please confirm my reservation!`;
 
-            const whatsappNumber = "18765558423";
+            const whatsappNumber = "18768668798";
 
             alert(`Thank you ${name}! Redirecting to WhatsApp to send your table reservation request to the restaurant...`);
             
