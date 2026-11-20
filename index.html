@@ -1224,30 +1224,72 @@
             submitBtn.innerText = "Processing Image...";
             submitBtn.disabled = true;
 
-            const reader = new FileReader();
-            reader.onload = async function(event) {
-                const base64Image = event.target.result;
-                try {
-                    const newItem = { title, price, desc, category, imageUrl: base64Image };
-                    const docRef = await db.collection("menuItems").add(newItem);
-                    
-                    menuItems.push({ id: docRef.id, ...newItem });
-                    renderMenu();
-                    
-                    document.getElementById('add-menu-form').reset();
-                    alert('Menu item and image successfully added!');
-                    closeAdminModal();
-                } catch (error) {
-                    alert("Failed to add item. Please try again.");
-                } finally {
-                    submitBtn.innerText = "Upload & Add Menu Item";
-                    submitBtn.disabled = false;
-                }
-            };
+            if (!imageFile) {
+                submitBtn.innerText = "Upload & Add Menu Item";
+                submitBtn.disabled = false;
+                return;
+            }
 
-            if (imageFile) {
-                reader.readAsDataURL(imageFile);
-            } else {
+            const compressImageToDataUrl = (file) => new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onerror = () => reject(new Error("File read failed"));
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onerror = () => reject(new Error("Image decode failed"));
+                    img.onload = () => {
+                        const maxSide = 1024;
+                        let { width, height } = img;
+                        if (width > maxSide || height > maxSide) {
+                            if (width >= height) {
+                                height = Math.round((height * maxSide) / width);
+                                width = maxSide;
+                            } else {
+                                width = Math.round((width * maxSide) / height);
+                                height = maxSide;
+                            }
+                        }
+                        const canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        let quality = 0.82;
+                        let dataUrl = canvas.toDataURL('image/jpeg', quality);
+                        // Keep base64 well below Firestore's ~1MB document limit
+                        while (dataUrl.length > 700000 && quality > 0.35) {
+                            quality -= 0.1;
+                            dataUrl = canvas.toDataURL('image/jpeg', quality);
+                        }
+                        if (dataUrl.length > 900000) {
+                            const smallerCanvas = document.createElement('canvas');
+                            smallerCanvas.width = Math.round(width * 0.7);
+                            smallerCanvas.height = Math.round(height * 0.7);
+                            smallerCanvas.getContext('2d').drawImage(canvas, 0, 0, smallerCanvas.width, smallerCanvas.height);
+                            dataUrl = smallerCanvas.toDataURL('image/jpeg', 0.7);
+                        }
+                        resolve(dataUrl);
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+
+            try {
+                const compressedImage = await compressImageToDataUrl(imageFile);
+                const newItem = { title, price, desc, category, imageUrl: compressedImage };
+                const docRef = await db.collection("menuItems").add(newItem);
+
+                menuItems.push({ id: docRef.id, ...newItem });
+                renderMenu();
+
+                document.getElementById('add-menu-form').reset();
+                alert('Menu item and image successfully added!');
+                closeAdminModal();
+            } catch (error) {
+                console.error("Error adding menu item:", error);
+                alert("Failed to add item. Please try again.");
+            } finally {
                 submitBtn.innerText = "Upload & Add Menu Item";
                 submitBtn.disabled = false;
             }
