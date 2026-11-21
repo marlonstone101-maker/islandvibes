@@ -29,10 +29,10 @@
     <meta name="twitter:description" content="Authentic coastal cuisine, island drinks, takeout, dining, and event space at 195 Constant Spring Rd, Kingston, Jamaica.">
     <meta name="twitter:image" content="logo.png">
 
-    <!-- Front-End Security Headers (Compatible with Tailwind, FontAwesome, Firebase, Google Maps, WiPay & WhatsApp) -->
+    <!-- Front-End Security Headers (Compatible with Tailwind, FontAwesome, Firebase, Google Maps, NCB & WhatsApp) -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' https: data: blob:; media-src 'self' https: data: blob:; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com data:; connect-src 'self' shttps://www.gstatic.com https://*.googleapis.com https://*.firebaseio.com https://*.cloudfunctions.net wss://*.firebaseio.com; frame-src 'self' https://www.google.com https://maps.google.com; object-src 'none'; base-uri 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' https: data: blob:; media-src 'self' https: data: blob:; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com data:; connect-src 'self' https://islandvibes.onrender.com http://localhost:3000 https://www.gstatic.com https://*.googleapis.com https://*.firebaseio.com https://*.cloudfunctions.net wss://*.firebaseio.com; frame-src 'self' https://www.google.com https://maps.google.com; object-src 'none'; base-uri 'self';">
 
     <!-- Structured Data (JSON-LD) for Google Search & Local Business Rich Results -->
     <script type="application/ld+json">
@@ -851,7 +851,7 @@
                 <span>Total:</span>
                 <span id="cart-total" class="text-sky-400">$0.00</span>
             </div>
-            <button onclick="proceedToWiPay()" class="w-full bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark py-3.5 rounded-xl font-extrabold hover:opacity-90 transition shadow-lg text-base">Pay</button>
+            <button onclick="proceedToNCB()" class="w-full bg-gradient-to-r from-green-600 via-sky-400 via-yellow-500 to-red-600 text-islandDark py-3.5 rounded-xl font-extrabold hover:opacity-90 transition shadow-lg text-base">Pay</button>
         </div>
     </div>
 
@@ -867,6 +867,7 @@
 
     <!-- JavaScript Application Logic -->
     <script>
+        const NCB_RENDER_API_BASE = "https://islandvibes.onrender.com";
         let currentFulfillment = 'delivery';
         let currentCategory = '';
         let reviews = [
@@ -893,6 +894,25 @@
                 return trimmed;
             }
             return 'logo.png';
+        }
+
+        function redirectToNCBCheckout(data) {
+            if (data && data.redirectUrl) {
+                window.location.href = data.redirectUrl;
+            } else if (data && data.redirectHtml) {
+                const container = document.createElement('div');
+                container.style.display = 'none';
+                container.innerHTML = data.redirectHtml;
+                document.body.appendChild(container);
+                const autoForm = container.querySelector('form');
+                if (autoForm) {
+                    autoForm.submit();
+                } else {
+                    throw new Error('Missing redirect form from NCB payment gateway.');
+                }
+            } else {
+                throw new Error('Unexpected response from NCB payment server.');
+            }
         }
 
         function openBookingBook() {
@@ -951,33 +971,54 @@
             }
         }
 
-        function handleEventBooking(e) {
+        async function handleEventBooking(e) {
             e.preventDefault();
             const eventType = document.getElementById('event-type-select').value;
             const name = document.getElementById('event-name').value.trim();
             const phone = document.getElementById('event-phone').value.trim();
             const date = document.getElementById('event-date').value;
             const guests = document.getElementById('event-guests').value;
+            const submitBtn = e.target.querySelector('button[type="submit"]');
 
             if (!eventType) {
                 alert('Please select an event type.');
                 return;
             }
 
-            alert('Redirecting securely to WiPay Payment Gateway for event space deposit...');
-            setTimeout(() => {
-                let eventText = `Hello Island Vibe Seafood, I would like to book the event space:%0A%0A`;
-                eventText += `*Event Type:* ${encodeURIComponent(eventType)}%0A`;
-                eventText += `*Full Name:* ${encodeURIComponent(name)}%0A`;
-                eventText += `*Phone Number:* ${encodeURIComponent(phone)}%0A`;
-                eventText += `*Event Date:* ${encodeURIComponent(date)}%0A`;
-                eventText += `*Estimated Guests:* ${encodeURIComponent(guests)}%0A%0A`;
-                eventText += `*Package:* Space Rental Only (JMD $45,000)%0A`;
-                eventText += `*Deposit Status: Paid via WiPay*`;
+            const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Redirecting to NCB Checkout...</span>';
+            }
 
-                const whatsappNumber = "18768668798"; // Replace with your restaurant's WhatsApp number
-                window.location.href = `https://wa.me/${whatsappNumber}?text=${eventText}`;
-            }, 1500);
+            try {
+                const res = await fetch(`${NCB_RENDER_API_BASE}/api/ncb/create-payment`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        orderType: 'event_deposit',
+                        amountJmd: 45000,
+                        eventType,
+                        customerName: name,
+                        customerPhone: phone,
+                        eventDate: date,
+                        estimatedGuests: Number(guests),
+                        packageName: 'Space Rental Only (JMD $45,000)',
+                        whatsappNumber: '18768668798'
+                    })
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.error || 'Unable to start NCB payment session.');
+                }
+                redirectToNCBCheckout(data);
+            } catch (err) {
+                alert(err.message || 'Unable to connect to NCB Payment Gateway. Please try again.');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnHtml;
+                }
+            }
         }
 
         function openLightbox(imgSrc) {
@@ -1360,7 +1401,7 @@
             }
         }
 
-        function proceedToWiPay() {
+        async function proceedToNCB() {
             if (cart.length === 0) {
                 alert('Your order is empty!');
                 return;
@@ -1369,6 +1410,7 @@
             const customerName = document.getElementById('customer-name').value.trim();
             const phone = document.getElementById('customer-phone').value.trim();
             const location = document.getElementById('customer-location').value.trim();
+            const payBtn = document.querySelector('#cart-drawer button[onclick="proceedToNCB()"]');
 
             if (!customerName) {
                 alert('Please enter your name.');
@@ -1388,24 +1430,38 @@
                 return;
             }
 
-            alert('Redirecting securely to WiPay Payment Gateway...');
-            setTimeout(() => {
-                let orderText = `Hello Island Vibe Seafood, I would like to place an order:%0A`;
-                orderText += `*Fulfillment:* ${currentFulfillment.toUpperCase()}%0A`;
-                orderText += `*Name:* ${encodeURIComponent(customerName)}%0A`;
-                if (currentFulfillment === 'delivery') {
-                    orderText += `*Address:* ${encodeURIComponent(location)}%0A`;
-                }
-                orderText += `*Phone:* ${encodeURIComponent(phone)}%0A%0A*Items:*%0A`;
-                
-                cart.forEach((item, i) => {
-                    orderText += `${i + 1}. ${item.title} - ${item.price}%0A`;
-                });
-                orderText += `%0A*Payment Status: Paid via WiPay*`;
+            const originalText = payBtn ? payBtn.innerText : 'Pay';
+            if (payBtn) {
+                payBtn.disabled = true;
+                payBtn.innerText = 'Redirecting to NCB Checkout...';
+            }
 
-                const whatsappNumber = "18768668798"; 
-                window.location.href = `https://wa.me/${whatsappNumber}?text=${orderText}`;
-            }, 1500);
+            try {
+                const res = await fetch(`${NCB_RENDER_API_BASE}/api/ncb/create-payment`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        orderType: 'food_order',
+                        fulfillment: currentFulfillment,
+                        customerName,
+                        customerPhone: phone,
+                        deliveryAddress: currentFulfillment === 'delivery' ? location : 'Pickup at Restaurant',
+                        items: cart,
+                        whatsappNumber: '18768668798'
+                    })
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.error || 'Unable to start NCB payment session.');
+                }
+                redirectToNCBCheckout(data);
+            } catch (err) {
+                alert(err.message || 'Unable to connect to NCB Payment Gateway. Please try again.');
+                if (payBtn) {
+                    payBtn.disabled = false;
+                    payBtn.innerText = originalText;
+                }
+            }
         }
 
         function handleBooking(e) {
